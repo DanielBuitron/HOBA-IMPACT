@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14110f">
+<title>Tu toalla · HOBA Impact</title>
+<link rel="icon" href="/HOBA-IMPACT/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="/HOBA-IMPACT/icono-pestana.png" sizes="32x32">
+<style>
+:root{--ink:#14110f;--red:#C8102E;--cream:#f4efe6;--paper:#f3efe6;--txt:#1a1614;--mut:#6f675f}
+*{box-sizing:border-box}
+body{margin:0;background:#161311;color:#f6f1e8;font-family:Bahnschrift,"Segoe UI",system-ui,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+img{max-width:100%;display:block}
+.cinta{background:#C8102E;color:#faf6f1;text-align:center;font-size:12px;font-weight:650;letter-spacing:.12em;text-transform:uppercase;padding:9px 22px}
+.tope{position:sticky;top:0;z-index:30;background:#1c1815}
+.nav{background:linear-gradient(180deg,#2a221c 0%,#1c1815 100%);box-shadow:inset 0 -1px 0 #C8102E;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:6px 22px}
+.marca{display:flex;align-items:center;width:68px;height:68px}
+.marca img{width:68px;height:68px;object-fit:contain;mix-blend-mode:lighten}
+.links{display:flex;gap:2px;justify-content:center;overflow:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{position:relative;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#e7dfd4;padding:8px 10px;white-space:nowrap;font-weight:650;text-decoration:none}
+.links a:after{content:"";position:absolute;left:10px;right:10px;bottom:2px;height:2px;border-radius:2px;background:#C8102E;transform:scaleX(0);transform-origin:left}
+.links a.on,.links a:hover{color:#fff}
+.links a.on:after,.links a:hover:after{transform:scaleX(1)}
+.ir-cat{background:#faf6f1;color:#1c1814;text-decoration:none;border-radius:999px;padding:10px 16px;font-size:13px;font-weight:700;white-space:nowrap}
+main{padding:22px;max-width:1180px;margin:0 auto}
+.encabezado h1{margin:0;font-size:34px;letter-spacing:-.04em;line-height:.95}
+.encabezado p{margin:8px 0 0;color:#d9d0c4;max-width:62ch}
+.taller{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:18px;margin-top:18px;align-items:start}
+.escenario{background:radial-gradient(420px 220px at 50% 0%,#C8102E55,transparent 70%),linear-gradient(165deg,#2a211c,#100e0c);border-radius:24px;padding:16px 16px 12px}
+canvas{width:100%;height:auto;border-radius:16px;touch-action:none;cursor:grab;background:#14110f}
+canvas.mov{cursor:grabbing}
+.pista{margin:10px 4px 0;color:#e7dfd4;font-size:13px}
+.controles{background:#faf6f1;color:#1a1614;border-radius:24px;padding:16px;border-left:4px solid #C8102E;display:grid;gap:14px}
+.controles h2{margin:0;font-size:18px}
+.grupo{display:grid;gap:8px}
+.grupo b{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6f675f}
+.colores,.formas{display:flex;flex-wrap:wrap;gap:8px}
+.formas button,.paso button,.acciones button{border:0;border-radius:999px;padding:9px 14px;background:#efe8de;color:#1a1614}
+.formas button.on{background:#1c1815;color:#faf6f1}
+.colores button{width:34px;height:34px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #e5ddd2;padding:0}
+.colores button.on{box-shadow:0 0 0 2px #C8102E}
+.otro{display:flex;align-items:center;gap:8px;font-size:13px}
+.otro input[type=color]{width:42px;height:34px;border:0;background:transparent;padding:0}
+label.campo{display:grid;gap:6px;font-size:13px;color:#3f3832}
+input[type=text],input[type=number],input[type=range]{width:100%}
+input[type=text],input[type=number]{height:40px;border:0;border-radius:12px;background:#fff;padding:0 12px;box-shadow:inset 0 0 0 1px #e5ddd2}
+.logo-fila{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.logo-fila input{position:absolute;width:1px;height:1px;opacity:0}
+.elegir{border:0;border-radius:12px;background:#fff;color:#1a1614;padding:9px 14px;box-shadow:inset 0 0 0 1px #e5ddd2}
+.paso{display:flex;gap:8px;align-items:center}
+.paso input{width:72px}
+.acciones{display:flex;flex-wrap:wrap;gap:8px}
+.acciones .p{background:#C8102E;color:#fff}
+.nota{margin:0;font-size:13px;color:#6f675f;line-height:1.45}
+.aviso{margin:0;font-size:14px;color:#8e0c22}
+.pie{padding:22px;color:#d9d0c4;font-size:13px}
+.pie a{color:#fff}
+body.marco{background:#f3eee6}
+body.marco .cinta,body.marco .tope,body.marco .pie{display:none}
+body.marco main{padding:12px}
+body.marco .encabezado h1{color:#1a1614;font-size:28px}
+body.marco .encabezado p{color:#6f675f}
+@media(max-width:860px){
+  .nav{grid-template-columns:auto 1fr;padding:6px 12px}
+  .ir-cat{display:none}
+  .taller{grid-template-columns:1fr}
+  main{padding:14px 12px 28px}
+  .encabezado h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="cinta">Toalla en microfibra · El precio se confirma al pedir</div>
+<div class="tope">
+<header class="nav">
+  <a class="marca" href="/HOBA-IMPACT/inicio"><img src="/HOBA-IMPACT/inicio/img/web-logo.png" alt="HOBA Impact"></a>
+  <nav class="links" id="nav"></nav>
+  <a class="ir-cat" href="/HOBA-IMPACT/c">Ver catálogo</a>
+</header>
+</div>
+<main>
+  <div class="encabezado"><h1>Arma tu toalla</h1><p>Elige el paño, el color y sube el logo. La toalla cambia en el momento, mientras la mueves.</p></div>
+  <div class="taller">
+    <div class="escenario">
+      <canvas id="lienzo" width="900" height="640" aria-label="Vista de la toalla. Arrastra el logo para colocarlo."></canvas>
+      <p class="pista" id="pista">Arrastra el logo sobre el paño.</p>
+    </div>
+    <form class="controles" id="form" onsubmit="return false">
+      <h2>Así la quieres</h2>
+      <div class="grupo"><b>Forma</b><div class="formas" id="formas">
+        <button type="button" data-forma="cuadrada" class="on">Cuadrada</button>
+        <button type="button" data-forma="rectangular">Rectangular</button>
+      </div></div>
+      <div class="grupo"><b>Color del paño</b><div class="colores" id="colores"></div>
+        <label class="otro">Otro color <input id="libre" type="color" value="#1a1614" aria-label="Otro color de paño"></label>
+      </div>
+      <div class="grupo"><b>Borde</b><div class="colores" id="bordes"></div></div>
+      <div class="grupo"><b>Logo</b>
+        <div class="logo-fila"><button type="button" class="elegir" id="elegir">Elegir logo</button><span id="archivoNombre">Ninguno todavía</span><input id="archivo" type="file" accept="image/png,image/jpeg,image/webp" aria-label="Logo"></div>
+        <label class="campo">Tamaño del logo<input id="tam" type="range" min="16" max="70" value="34"></label>
+        <label class="campo">Horizontal<input id="px" type="range" min="8" max="92" value="50"></label>
+        <label class="campo">Vertical<input id="py" type="range" min="12" max="88" value="46"></label>
+      </div>
+      <label class="campo">Letras sobre la toalla<input id="letras" type="text" maxlength="18" placeholder="Ej. el nombre de la unidad" autocomplete="off"></label>
+      <div class="grupo"><b>Cantidad</b><div class="paso"><button type="button" id="menos">−</button><input id="cant" type="number" min="1" max="500" value="1"><button type="button" id="mas">+</button></div></div>
+      <p class="nota">El precio queda al confirmar. El logo se ve aquí; al pedir, envíalo también por WhatsApp para que quede en el pedido.</p>
+      <p class="aviso" id="aviso" hidden></p>
+      <div class="acciones">
+        <button type="button" class="p" id="pedir">Agregar al pedido</button>
+        <button type="button" id="bajar">Descargar esta vista</button>
+        <button type="button" id="limpiar">Empezar de nuevo</button>
+      </div>
+    </form>
+  </div>
+</main>
+<footer class="pie">HOBA Impacto SAS · Tuluá · <a id="wa" href="https://wa.me/573155813545">WhatsApp</a></footer>
+<script>
+const CFG={"menus": [{"id": "inicio", "titulo": "Inicio", "destino": "inicio", "visible": true}, {"id": "catalogo", "titulo": "Catálogo", "destino": "catalogo", "visible": true}, {"id": "toalla", "titulo": "Tu toalla", "destino": "toalla", "visible": true}, {"id": "bordado", "titulo": "Bordado", "destino": "bordado", "visible": true}, {"id": "entrega", "titulo": "Entrega", "destino": "entrega", "visible": true}, {"id": "contacto", "titulo": "Contacto", "destino": "contacto", "visible": true}, {"id": "panel", "titulo": "Panel", "destino": "panel", "visible": true}], "estilos": {"tinta": "#000000", "rojo": "#C8102E", "fondo": "#f3efe6", "tarjeta": "#ffffff", "texto": "#161616"}};
+const BASE={"id": 470, "nombre": "Toalla de microfibra 01", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-001.png?v=1792863811", "precio": ""};
+const MARCO=''==='1';
+const WA='573155813545';
+const $=s=>document.querySelector(s);
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const PANOS=[['Negro','#1a1614'],['Rojo','#C8102E'],['Crema','#f4efe6'],['Blanco','#f7f4ee'],['Oliva','#3f4a32'],['Azul','#1c3d5a'],['Gris','#8a8178']];
+const estado={forma:'cuadrada',pano:'#1a1614',panoNombre:'Negro',borde:'#f4efe6',logo:null,arrastrando:false};
+const cv=$('#lienzo'),ctx=cv.getContext('2d');
+if(MARCO)document.body.classList.add('marco');
+function destino(m){if(m.destino==='catalogo')return '/HOBA-IMPACT/c';if(m.destino==='toalla')return '/HOBA-IMPACT/inicio/toalla';if(m.destino==='bordar')return '/HOBA-IMPACT/inicio/bordar';if(m.destino==='panel')return '/HOBA-IMPACT/panel';if(m.destino==='inicio')return '/HOBA-IMPACT/inicio';return '/HOBA-IMPACT/inicio/'+m.destino}
+function menusDe(){
+  const quita={pedir:1,bordar:1,bordado:1};
+  const menus=(CFG.menus||[]).filter(m=>m.visible&&!quita[m.destino]);
+  if(!menus.some(m=>m.destino==='toalla')){const item={titulo:'Tu toalla',destino:'toalla'};const i=menus.findIndex(m=>m.destino==='catalogo');if(i>=0)menus.splice(i+1,0,item);else menus.push(item)}
+  return menus;
+}
+$('#nav').innerHTML=menusDe().map(m=>'<a class="'+(m.destino==='toalla'?'on':'')+'" href="'+esc(destino(m))+'">'+esc(m.titulo)+'</a>').join('');
+function pintas(id,cual){
+  $(id).innerHTML=PANOS.map(([n,h])=>'<button type="button" data-h="'+h+'" data-n="'+esc(n)+'" title="'+esc(n)+'" style="background:'+h+'"></button>').join('');
+  $(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{cual(b.dataset.h,b.dataset.n);marcar(id,b.dataset.h);dibuja()});
+}
+function marcar(id,hex){$(id).querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.h===hex))}
+pintas('#colores',(h,n)=>{estado.pano=h;estado.panoNombre=n;$('#libre').value=h});
+pintas('#bordes',(h)=>{estado.borde=h});
+marcar('#colores',estado.pano);marcar('#bordes',estado.borde);
+$('#formas').querySelectorAll('button').forEach(b=>b.onclick=()=>{estado.forma=b.dataset.forma;$('#formas').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));dibuja()});
+$('#libre').oninput=()=>{estado.pano=$('#libre').value;estado.panoNombre='Color '+estado.pano;marcar('#colores','');dibuja()};
+$('#tam').oninput=dibuja;$('#px').oninput=dibuja;$('#py').oninput=dibuja;$('#letras').oninput=dibuja;
+$('#elegir').onclick=()=>$('#archivo').click();
+$('#archivo').onchange=()=>{
+  const f=$('#archivo').files&&$('#archivo').files[0];
+  $('#archivoNombre').textContent=f?f.name:'Ninguno todavía';
+  $('#aviso').hidden=true;
+  if(!f){estado.logo=null;dibuja();return}
+  if(!/^image\/(png|jpeg|webp)$/.test(f.type)||f.size>8*1024*1024){$('#aviso').hidden=false;$('#aviso').textContent='Usa una imagen PNG, JPG o WebP de hasta 8 MB.';return}
+  const url=URL.createObjectURL(f);
+  const im=new Image();
+  im.onload=()=>{if(estado.logo&&estado.logo._url)URL.revokeObjectURL(estado.logo._url);im._url=url;estado.logo=im;dibuja()};
+  im.onerror=()=>{$('#aviso').hidden=false;$('#aviso').textContent='Esa imagen no se pudo abrir.';URL.revokeObjectURL(url)};
+  im.src=url;
+};
+function cant(n){const v=Math.max(1,Math.min(500,Math.round(+$('#cant').value||1)+n));$('#cant').value=v}
+$('#menos').onclick=()=>cant(-1);$('#mas').onclick=()=>cant(1);
+function ronda(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function cajaPano(){
+  const forma=estado.forma==='rectangular'?1.55:1;
+  let tw=cv.width*0.72,th=tw/forma;
+  if(th>cv.height*0.78){th=cv.height*0.78;tw=th*forma}
+  return {x:(cv.width-tw)/2,y:(cv.height-th)/2+6,w:tw,h:th};
+}
+function cajaLogo(p){
+  if(!estado.logo)return null;
+  const tam=+$('#tam').value||34;
+  const lw=p.w*(tam/100);
+  const lh=lw*(estado.logo.height/estado.logo.width||1);
+  const lx=p.x+(+$('#px').value/100)*p.w-lw/2;
+  const ly=p.y+(+$('#py').value/100)*p.h-lh/2;
+  return {x:lx,y:ly,w:lw,h:lh};
+}
+function dibuja(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  const g=ctx.createLinearGradient(0,0,0,cv.height);
+  g.addColorStop(0,'#2a211c');g.addColorStop(1,'#100e0c');
+  ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
+  const p=cajaPano();
+  ctx.save();
+  ctx.shadowColor='rgba(0,0,0,.45)';ctx.shadowBlur=28;ctx.shadowOffsetY=18;
+  ronda(p.x,p.y,p.w,p.h,28);ctx.fillStyle=estado.pano;ctx.fill();
+  ctx.restore();
+  ctx.save();
+  ronda(p.x,p.y,p.w,p.h,28);ctx.clip();
+  ctx.globalAlpha=.14;ctx.strokeStyle='#fff';ctx.lineWidth=1;
+  for(let y=p.y;y<p.y+p.h;y+=10){ctx.beginPath();ctx.moveTo(p.x,y);ctx.lineTo(p.x+p.w,y);ctx.stroke()}
+  ctx.globalAlpha=.08;
+  for(let x=p.x;x<p.x+p.w;x+=14){ctx.beginPath();ctx.moveTo(x,p.y);ctx.lineTo(x,p.y+p.h);ctx.stroke()}
+  const brillo=ctx.createLinearGradient(p.x,p.y,p.x,p.y+p.h);
+  brillo.addColorStop(0,'rgba(255,255,255,.22)');brillo.addColorStop(.35,'rgba(255,255,255,0)');brillo.addColorStop(1,'rgba(0,0,0,.18)');
+  ctx.globalAlpha=1;ctx.fillStyle=brillo;ctx.fillRect(p.x,p.y,p.w,p.h);
+  const logo=cajaLogo(p);
+  if(logo){ctx.shadowColor='rgba(0,0,0,.25)';ctx.shadowBlur=12;ctx.drawImage(estado.logo,logo.x,logo.y,logo.w,logo.h);ctx.shadowBlur=0}
+  const texto=($('#letras').value||'').trim().slice(0,18);
+  if(texto){
+    ctx.fillStyle=claro(estado.pano)?'#1a1614':'#faf6f1';
+    ctx.font='700 42px Bahnschrift,Segoe UI,sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    const ty=logo?Math.min(p.y+p.h-46,logo.y+logo.h+36):p.y+p.h*0.72;
+    ctx.fillText(texto,p.x+p.w/2,ty,p.w*0.8);
+  }
+  ctx.restore();
+  ctx.lineWidth=14;ctx.strokeStyle=estado.borde;ronda(p.x,p.y,p.w,p.h,28);ctx.stroke();
+  $('#pista').textContent=estado.logo?'Arrastra el logo para acomodarlo.':'Sube el logo y se coloca sobre el paño.';
+}
+function claro(hex){
+  const n=String(hex||'#000').replace('#','');
+  if(n.length<6)return false;
+  const r=parseInt(n.slice(0,2),16),g=parseInt(n.slice(2,4),16),b=parseInt(n.slice(4,6),16);
+  return (r*299+g*587+b*114)/1000>160;
+}
+function local(ev){
+  const r=cv.getBoundingClientRect();
+  return {x:(ev.clientX-r.left)/r.width*cv.width,y:(ev.clientY-r.top)/r.height*cv.height};
+}
+cv.addEventListener('pointerdown',ev=>{
+  const p=cajaPano(),logo=cajaLogo(p),pt=local(ev);
+  if(!logo||pt.x<logo.x||pt.x>logo.x+logo.w||pt.y<logo.y||pt.y>logo.y+logo.h)return;
+  estado.arrastrando=true;cv.classList.add('mov');cv.setPointerCapture(ev.pointerId);
+});
+cv.addEventListener('pointermove',ev=>{
+  if(!estado.arrastrando)return;
+  const p=cajaPano(),pt=local(ev);
+  $('#px').value=Math.max(8,Math.min(92,Math.round((pt.x-p.x)/p.w*100)));
+  $('#py').value=Math.max(12,Math.min(88,Math.round((pt.y-p.y)/p.h*100)));
+  dibuja();
+});
+function suelta(){estado.arrastrando=false;cv.classList.remove('mov')}
+cv.addEventListener('pointerup',suelta);cv.addEventListener('pointercancel',suelta);
+function resumen(){
+  const forma=estado.forma==='cuadrada'?'cuadrada':'rectangular';
+  const letras=($('#letras').value||'').trim();
+  return 'Toalla '+forma+', paño '+estado.panoNombre+' '+estado.pano+', borde '+estado.borde+(estado.logo?', con logo del cliente':'')+(letras?', letras: '+letras:'')+'.';
+}
+function guardarPedido(){
+  const forma=estado.forma==='cuadrada'?'Cuadrada':'Rectangular';
+  const color=(estado.panoNombre+' '+estado.pano).slice(0,40);
+  const cantN=Math.max(1,Math.min(500,Math.round(+$('#cant').value||1)));
+  let mem={};try{mem=JSON.parse(sessionStorage.getItem('hoba-contacto')||'{}')}catch(e){}
+  mem.nota=resumen().slice(0,500);
+  sessionStorage.setItem('hoba-contacto',JSON.stringify(mem));
+  if(!BASE.id)return false;
+  const linea={id:BASE.id,nombre:BASE.nombre||'Toalla personalizada',imagen:BASE.imagen||'',talla:forma,color:color,genero:'Unisex',cantidad:cantN,precio:+BASE.precio||0};
+  let carro=[];try{carro=JSON.parse(sessionStorage.getItem('hoba-carro')||'[]')}catch(e){}
+  if(!Array.isArray(carro))carro=[];
+  const clave=[linea.id,linea.talla,linea.color,linea.genero].join('|');
+  const i=carro.findIndex(x=>[x.id,x.talla,x.color,x.genero].join('|')===clave);
+  if(i>=0)carro[i]=linea;else carro.push(linea);
+  sessionStorage.setItem('hoba-carro',JSON.stringify(carro));
+  return true;
+}
+$('#pedir').onclick=()=>{
+  const ok=guardarPedido();
+  if(!ok){$('#aviso').hidden=false;$('#aviso').textContent='Descarga la vista y envíala por WhatsApp. En el catálogo todavía no hay una toalla para colgar este pedido.';return}
+  if(MARCO){$('#aviso').hidden=false;$('#aviso').textContent='Quedó en el pedido de la tienda. Abre el catálogo para enviarlo, y manda el logo por WhatsApp.';return}
+  location.href='/HOBA-IMPACT/c?tipo='+encodeURIComponent('Toallas en microfibra personalizadas');
+};
+$('#bajar').onclick=()=>{const a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download='toalla-hoba.png';a.click()};
+$('#limpiar').onclick=()=>{
+  if(estado.logo&&estado.logo._url)URL.revokeObjectURL(estado.logo._url);
+  estado.logo=null;estado.forma='cuadrada';estado.pano='#1a1614';estado.panoNombre='Negro';estado.borde='#f4efe6';
+  $('#archivo').value='';$('#archivoNombre').textContent='Ninguno todavía';$('#letras').value='';$('#tam').value=34;$('#px').value=50;$('#py').value=46;$('#cant').value=1;$('#libre').value='#1a1614';
+  $('#formas').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.forma==='cuadrada'));
+  marcar('#colores',estado.pano);marcar('#bordes',estado.borde);$('#aviso').hidden=true;dibuja();
+};
+dibuja();
+</script>
+</body>
+</html>

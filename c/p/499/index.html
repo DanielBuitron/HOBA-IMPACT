@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14110f">
+<title>Catálogo HOBA Impact</title>
+<link rel="icon" href="/HOBA-IMPACT/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="/HOBA-IMPACT/icono-pestana.png" sizes="32x32">
+<style>
+:root{--ink:#14110f;--red:#C8102E;--cream:#f4efe6;--mut:#6f6a62;--ln:#e4dcd0;--bg:#f3efe6;--paper:#f3efe6;--txt:#1a1614;--card:#fff;--ok:#1f7a4d;--campo:#fff;--header:radial-gradient(900px 140px at 8% 0%,#6a4030 0%,transparent 58%),linear-gradient(180deg,#3d3128 0%,#241c18 100%)}
+*{box-sizing:border-box}
+html,body{margin:0;background:#f3efe6;color:#1a1614}
+body{font-family:Bahnschrift,"Segoe UI",system-ui,sans-serif;min-height:100vh;background:radial-gradient(900px 240px at 100% -80px,#efe6d8 0%,transparent 55%),#f3efe6;color:#1a1614}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+img{max-width:100%;display:block}
+.cinta{background:#C8102E;color:#faf6f1;text-align:center;font-size:12px;font-weight:650;letter-spacing:.12em;text-transform:uppercase;padding:9px 22px}
+.cinta:before{content:none}
+.tope{position:sticky;top:0;z-index:40}
+.top{background:linear-gradient(180deg,#2a221c 0%,#1c1815 100%);color:#f6f1e8;padding:8px 18px 0;box-shadow:inset 0 -1px 0 #C8102E}
+.cab{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:auto minmax(180px,1fr);gap:16px;align-items:center}
+.marca{display:flex;align-items:center;gap:10px;min-width:0}
+.busca{position:relative;min-width:0}
+.busca input{width:100%;height:42px;border:0;border-radius:999px;background:#faf6f1;color:#1c1814;padding:0 18px;outline:0;box-shadow:0 0 0 1px #f4efe644}
+.busca input:focus{box-shadow:0 0 0 2px #C8102E}
+.sugerencias{position:absolute;top:48px;left:0;right:0;background:#fff;color:#161616;border-radius:10px;box-shadow:0 18px 40px #000a;max-height:420px;overflow:auto;z-index:60}
+.sugerencias[hidden]{display:none}
+.sugerencias a{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:center;padding:8px 10px;color:#161616;text-decoration:none}
+.sugerencias a:hover{background:#f6f3ee}
+.sugerencias img{width:64px;height:64px;object-fit:contain;background:#fff;border-radius:6px}
+.sugerencias b{display:block;font-size:14px}
+.sugerencias small{color:#6b6560;font-size:12px}
+.sugerencias .nada{margin:0;padding:14px;color:#6b6560}
+.logo{height:64px;width:64px;object-fit:contain;border-radius:0;display:block;background:transparent;text-decoration:none;flex:none;mix-blend-mode:lighten}
+.marca h1{margin:0;font-size:14px;letter-spacing:.2em;font-weight:750}
+.bajada{margin:1px 0 0;color:#d5cec2;font-size:12px}
+.snav{display:flex;gap:4px;overflow:auto;margin:6px -18px 0;padding:0 18px 4px;scrollbar-width:none}
+.snav::-webkit-scrollbar{display:none}
+.snav a{position:relative;color:#e7dfd4;text-decoration:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 10px;white-space:nowrap;font-weight:650;border-radius:0}
+.snav a:after{content:"";position:absolute;left:10px;right:10px;bottom:2px;height:2px;border-radius:2px;background:#C8102E;transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
+.snav a:hover{color:#fff}
+.snav a:hover:after,.snav a.on:after{transform:scaleX(1)}
+.snav a.on{color:#fff}
+.cats{display:none}
+.cats::-webkit-scrollbar{display:none}
+.cats a{display:flex;flex-direction:column;align-items:center;gap:7px;width:104px;flex:none;color:#1a1614;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;scroll-snap-align:start;text-align:center}
+.cats a img{width:104px;height:104px;border-radius:20px;object-fit:contain;object-position:center;background:#faf6f1;border:0;padding:2px;flex:none;box-shadow:0 8px 18px #1c181422;transition:transform .25s ease,box-shadow .25s ease}
+.cats a:hover{background:transparent;color:#C8102E;box-shadow:none;transform:none}
+.cats a:hover img{box-shadow:0 0 0 2px #C8102E;transform:translateY(-5px)}
+.cats a.on{background:transparent;color:#C8102E;border:0}
+.cats a.on img{box-shadow:0 0 0 2px #C8102E}
+.filtros{max-width:1200px;margin:0 auto;padding:16px 18px 0}
+.linea-bar{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:6px 20px;border-bottom:1px solid #e4dcd0}
+.lineas{display:flex;flex-wrap:wrap;gap:2px 26px;flex:1 1 520px}
+.lineas button{border:0;background:transparent;color:#3a342f;font-size:16px;font-weight:650;padding:10px 0 12px;border-bottom:2px solid transparent;margin-bottom:-1px;border-radius:0;letter-spacing:0}
+.lineas button:hover{color:#1c1815}
+.lineas button.on{color:#C8102E;border-bottom-color:#C8102E}
+#cuenta{color:#5c564f;font-size:14px;white-space:nowrap;padding:0 0 12px;margin-left:auto}
+.afinar{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 22px;padding:14px 0 2px}
+.fgrupos{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 22px}
+.fgrupos label{display:flex;flex-direction:column;gap:5px;color:#1c1814;font-size:13px;font-weight:700}
+.fgrupos select{height:38px;min-width:190px;border:1px solid #e4dcd0;background:#fff;color:#1c1814;border-radius:10px;font-size:14px;font-weight:650;padding:0 12px}
+.fwrap{display:none}
+#limpiar{border:0;background:transparent;color:#C8102E;height:38px;padding:0;font-size:13px;font-weight:750}
+#limpiar[hidden]{display:none}
+.fwrap input,.fwrap select{height:38px;border:1px solid #e4dcd0;background:#fff;color:#161616;border-radius:999px;font-size:13px;padding:0 14px}
+.fwrap input{flex:1 1 160px;min-width:140px}
+.fwrap select{flex:0 1 auto}
+#cuenta{color:#6f6a62;font-size:12px;letter-spacing:.06em;margin-left:auto}
+main{max-width:1200px;margin:0 auto;padding:16px 14px 120px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;background:transparent}
+@media(min-width:760px){.grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}}
+.card{background:#faf6f1;border:0;border-radius:20px;overflow:hidden;text-align:left;padding:0;display:flex;flex-direction:column;min-height:100%;color:#1c1814;box-shadow:0 10px 26px #1c181418;transition:transform .25s ease,box-shadow .25s ease}
+a.arma-card{justify-content:flex-end;gap:6px;min-height:280px;padding:18px;text-decoration:none;color:#faf6f1;background:radial-gradient(140px 90px at 84% 12%,#C8102E88,transparent 70%),linear-gradient(160deg,#2a211c,#100e0c)}
+a.arma-card span{letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:#e7dfd4}
+a.arma-card b{font-size:26px;line-height:1}
+a.arma-card small{color:#e7dfd4;font-size:13px}
+.card:hover{transform:translateY(-8px);box-shadow:0 20px 36px #1c181438}
+.card:active{transform:translateY(0)}
+.foto{aspect-ratio:1;background:radial-gradient(circle at 50% 42%,#fff 0%,#f3ece3 74%);position:relative;padding:4px;overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:contain;object-position:center;filter:drop-shadow(0 12px 14px #1a161422) contrast(1.04);transform:scale(1.05);transition:transform .45s ease}
+.card:hover .foto img{transform:scale(1.08)}
+.letra{width:100%;height:100%;display:grid;place-items:center;font-size:42px;font-weight:750;color:#94a3b8}
+.sello{position:absolute;left:10px;top:10px;background:#161311;color:#f4efe6;border-radius:999px;border:0;padding:4px 8px;font-size:10px;font-weight:750;letter-spacing:.06em;text-transform:uppercase}
+.sello.ahora{color:#86efac}
+.sello.luego{color:#fdba74}
+.cuerpo{padding:4px 12px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.cuerpo small{color:#8a8580;font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.cuerpo h2{margin:0;font-size:14px;line-height:1.3;font-weight:550;color:#1c1814}
+.precio{display:inline-block;width:max-content;background:transparent;color:#C8102E;font-weight:750;font-size:13px;padding:2px 0 0;font-variant-numeric:tabular-nums}
+.puntos{display:flex;gap:4px;min-height:14px}
+.punto{width:12px;height:12px;border-radius:50%;border:1px solid #0002}
+.vacio{background:#fff;border:1px solid var(--ln);border-radius:16px;padding:22px 16px;text-align:center;color:#6f6a62}
+.vacio button{margin-top:8px;border:1px solid var(--red);background:transparent;color:var(--red);padding:8px 12px}
+.barra{position:fixed;left:16px;right:16px;bottom:12px;z-index:30;display:flex;justify-content:space-between;align-items:center;gap:12px;background:#1c1815;color:#f6f1e8;border-radius:18px;border-top:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));box-shadow:0 14px 32px #120e0c55}
+.barra b{display:block;font-size:14px}
+.barra span{color:#d5cec2;font-size:12px}
+.barra button{background:#C8102E;color:#faf6f1;border:0;border-radius:999px;padding:12px 16px;font-weight:750}
+.velo{position:fixed;inset:0;background:#0b1220b8;z-index:40;display:flex;align-items:flex-end;justify-content:center}
+.velo[hidden]{display:none}
+@media(min-width:860px){.velo{align-items:center;padding:24px}}
+.panel{background:#fff;color:#161616;width:min(980px,100%);max-height:min(92vh,920px);border-radius:18px;border:1px solid var(--ln);border-top:3px solid var(--red);overflow:auto;position:relative}
+@media(min-width:860px){.panel{border-radius:18px;max-height:min(88vh,860px)}}
+.hoja{display:grid}
+@media(min-width:860px){.hoja{grid-template-columns:1.05fr .95fr;align-items:start}}
+.visor{background:#fff;min-height:280px;position:relative;padding:8px;overflow:hidden}
+.visor img{width:100%;height:100%;max-height:560px;object-fit:contain;object-position:center;filter:drop-shadow(0 10px 16px #00000018)}
+.giro{position:relative;height:min(520px,62vh);min-height:260px;touch-action:none;cursor:grab;user-select:none}
+.giro.moviendo{cursor:grabbing}
+.giro img{position:absolute;inset:0;max-height:none;pointer-events:none}
+.pano{position:relative;height:min(520px,62vh);min-height:260px;touch-action:none;cursor:grab;user-select:none;perspective:1200px;display:grid;place-items:center}
+.pano.moviendo{cursor:grabbing}
+.pano-escena{width:min(500px,94%);aspect-ratio:5/3}
+.pano-giro{width:100%;height:100%;position:relative;transform-style:preserve-3d}
+.visor .pano-frente,.visor .pano-reverso{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:contain;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:transparent;border-radius:4px;filter:none}
+.visor .pano-reverso{filter:brightness(.45) saturate(.55);transform:none}
+.visor:has(.pano){overflow:visible}
+.pista{position:absolute;left:10px;bottom:10px;z-index:2;display:flex;align-items:center;gap:8px;margin:0;background:#1c1815;color:#faf6f1;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:750;pointer-events:none}
+.aro{width:64px;height:6px;border-radius:999px;background:#4a4038;position:relative}
+.aro i{position:absolute;top:-2px;width:10px;height:10px;border-radius:50%;background:#C8102E;transform:translateX(-50%)}
+.visor button.zoom{position:absolute;right:12px;bottom:12px;z-index:2;border:1px solid #3a3a3a;background:#1a1a1a;color:#f4efe6;border-radius:999px;padding:8px 12px;font-weight:700;font-size:13px}
+.x{position:absolute;right:12px;top:12px;z-index:2;width:40px;height:40px;border:1px solid #3a3a3a;border-radius:50%;background:#1a1a1a;color:#f4efe6;font-size:20px}
+.detalle{padding:18px 18px 24px;display:grid;gap:12px;align-content:start}
+.detalle h2{margin:0;font-size:28px;line-height:1.1;color:#161616;letter-spacing:-.02em}
+.detalle .desc{margin:0;color:#5c574e;line-height:1.5}
+.aviso{margin:0;background:#2a1216;color:#fecaca;border-radius:2px;padding:10px 12px;font-size:14px}
+.grupo{display:grid;gap:8px}
+.grupo b{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#a39e94}
+.ops{display:flex;flex-wrap:wrap;gap:8px}
+.op{border:1px solid #e4dcd0;background:#fff;color:#161616;border-radius:999px;padding:10px 14px;display:flex;align-items:center;gap:8px;transition:transform .15s ease,background .15s ease}
+.op.on{border-color:var(--red);background:#C8102E;color:#fff}
+.op .punto{width:14px;height:14px}
+.cant{display:flex;align-items:center;gap:8px}
+.cant button{width:42px;height:42px;border-radius:12px;border:1px solid #e0d8cc;background:#fff;color:#161616;font-size:22px}
+.cant input{width:72px;text-align:center;font-size:16px;padding:10px;border:1px solid #e0d8cc;border-radius:12px;background:#fff;color:#161616}
+.agregar{background:#C8102E;color:#fff;border:0;border-radius:14px;padding:14px;font-weight:750;font-size:16px;box-shadow:0 8px 18px #C8102E40}
+.ya{margin:0;color:var(--ok);font-size:14px}
+.luz{position:fixed;inset:0;background:#0b1220;z-index:60;display:grid;place-items:center;padding:16px}
+.luz[hidden]{display:none}
+.luz img{max-width:100%;max-height:100%;object-fit:contain}
+.luz button{position:absolute;top:16px;right:16px;width:44px;height:44px;border:0;border-radius:50%;background:#fff}
+.pedido{width:min(560px,100%)}
+.pedido h2{margin:8px 0 0}
+.linea{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:10px;padding:12px 0;border-top:1px solid var(--ln);align-items:center}
+.linea img,.linea .letra{width:64px;height:64px;border-radius:2px;object-fit:contain;background:#fff}
+.linea .letra{font-size:22px}
+.linea p{margin:2px 0 0;color:var(--mut);font-size:13px}
+.linea .cant button{width:34px;height:34px;font-size:18px}
+.linea .menos{border:0;background:transparent;color:var(--red);font-weight:700;padding:0}
+.total{display:flex;justify-content:space-between;font-size:18px;padding:8px 0 4px}
+.form{display:grid;gap:10px;margin-top:8px}
+.form label{display:grid;gap:4px;font-size:13px;color:#5c574e}
+.form input,.form textarea{font-size:16px;padding:12px;border:1px solid #e0d8cc;border-radius:12px;width:100%;background:#fff;color:#161616}
+.cols{display:grid;gap:10px}
+@media(min-width:560px){.cols{grid-template-columns:1fr 1fr}}
+.nota{color:var(--mut);font-size:13px;margin:0}
+.okbox{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:16px;padding:16px}
+.err{background:#fef2f2;color:#991b1b;border-radius:12px;padding:10px 12px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#0b1220;color:#fff;border-radius:14px;padding:12px 14px;z-index:50;display:flex;gap:12px;align-items:center;box-shadow:0 10px 30px #0006;max-width:calc(100% - 24px)}
+.toast[hidden]{display:none}
+.toast button{border:0;background:transparent;color:#fecaca;font-weight:750}
+.pad{padding:16px 16px 22px}
+body.es-prenda .filtros{display:none}
+#grid[hidden],#hoja[hidden]{display:none !important}
+#hoja{max-width:1120px;margin:0 auto;padding:16px 14px 120px}
+#hoja .panel{max-height:none;width:100%;border-radius:18px}
+.atras{margin:0 0 10px}
+.atras a{letter-spacing:.12em;text-transform:uppercase;font-size:12px;text-decoration:none}
+.similares{margin-top:22px}
+.similares h2{margin:4px 0 12px;font-size:22px}
+.ojo{margin:0;color:var(--red);font-size:11px;font-weight:800;letter-spacing:.16em}
+.carrusel{display:flex;gap:10px;overflow:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.carrusel a{flex:0 0 200px;scroll-snap-align:start;background:#fff;border:0;border-radius:18px;color:#161616;text-decoration:none;overflow:hidden;box-shadow:0 10px 24px #1a161418}
+.carrusel img,.carrusel .letra{height:180px;width:100%;object-fit:contain;background:#fff}
+.carrusel b{display:block;padding:8px 10px 0;font-size:14px}
+.carrusel .precio{display:block;padding:4px 10px 10px}
+.wa-flot{position:fixed;right:16px;bottom:88px;z-index:45;display:flex;align-items:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;border-radius:999px;padding:10px 14px 10px 10px;font-weight:750;box-shadow:0 10px 28px #0006}
+.wa-flot svg{display:block}
+body.es-prenda{background:#f3efe6;color:#161616}
+body.es-prenda .top{color:#fff}
+body.es-prenda #hoja .panel,
+body.es-prenda .ficha{background:#fff;color:#161616;border:1px solid #e7e2d8}
+body.es-prenda .visor,
+body.es-prenda .foto{background:#fff}
+body.es-prenda .detalle,
+body.es-prenda .detalle h2{color:#161616}
+body.es-prenda .detalle .desc,
+body.es-prenda .detalle small,
+body.es-prenda .grupo b,
+body.es-prenda .nota,
+body.es-prenda .form label{color:#5c574e}
+body.es-prenda .op,
+body.es-prenda .cant button,
+body.es-prenda .cant input,
+body.es-prenda .form input,
+body.es-prenda .form textarea{background:#fff;color:#161616;border-color:#ddd}
+body.es-prenda .op.on{background:#C8102E;color:#fff;border-color:#C8102E}
+body.es-prenda .similares h2,
+body.es-prenda .atras a{color:#161616}
+body.es-prenda .carrusel a{background:#fff;color:#161616;border-color:#e7e2d8}
+body.es-prenda .carrusel img,
+body.es-prenda .carrusel .letra{background:#fff}
+body.es-prenda .x,
+body.es-prenda .visor button.zoom{background:#fff;color:#161616;border-color:#ddd}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #C8102E;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none !important}}
+@media(max-width:1100px){
+  .snav a{letter-spacing:.05em;padding:8px 10px}
+  .logo{width:64px;height:64px}
+}
+@media(max-width:800px){
+  .cinta{font-size:11px;letter-spacing:.04em;line-height:1.35;padding:8px 12px}
+  .cab{grid-template-columns:auto minmax(0,1fr);gap:10px}
+  .busca{grid-column:1 / -1}
+  .bajada{display:none}
+  .logo{width:56px;height:56px}
+  .marca h1{font-size:13px;letter-spacing:.14em}
+  .snav{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}
+  .top{padding-left:12px;padding-right:12px}
+  #cuenta{flex:1 0 100%;padding-top:2px}
+  .fwrap{flex-wrap:nowrap;overflow:auto;padding-bottom:4px}
+  .fwrap select,#limpiar{flex:none}
+  #cuenta{flex:none;margin-left:8px;white-space:nowrap}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  main,#hoja{padding-left:10px;padding-right:10px}
+  .detalle{padding:14px}
+  .detalle h2{font-size:24px}
+  .visor{padding:10px}
+  .giro,.pano{height:min(280px,40vh);min-height:200px}
+  .wa-flot{bottom:calc(96px + env(safe-area-inset-bottom))}
+  .barra{left:10px;right:10px;bottom:8px}
+}
+@media(max-width:420px){
+  .cuerpo h2{font-size:13px}
+  .cuerpo{padding:4px 8px 12px}
+  .sello{left:8px;top:8px;font-size:9px}
+}
+</style>
+</head>
+<body>
+<div class="cinta">Uniformes tácticos HOBA Impact · Tuluá · El precio se confirma al pedir</div>
+<div class="tope">
+<header class="top">
+  <div class="cab">
+    <div class="marca">
+      <a href="/HOBA-IMPACT/inicio" aria-label="HOBA Impact"><img class="logo" src="/HOBA-IMPACT/inicio/img/web-logo.png" alt="HOBA Impact"></a>
+      <div><h1 id="tituloPag">CATÁLOGO</h1><p class="bajada" id="bajadaPag">Talla, color y cantidad. También puedes escribirlo por WhatsApp.</p></div>
+    </div>
+    <div class="busca">
+      <input id="q" type="search" placeholder="Buscar uniforme, bota, toalla..." autocomplete="off" aria-label="Buscar producto" enterkeyhint="search">
+      <div id="sugerencias" class="sugerencias" hidden></div>
+    </div>
+  </div>
+  <nav class="snav" id="snav"></nav>
+</header>
+</div>
+<div class="filtros">
+  <div class="linea-bar">
+    <nav class="lineas" id="lineas" aria-label="Líneas"></nav>
+    <span id="cuenta"></span>
+  </div>
+  <div class="afinar">
+    <div class="fgrupos" id="fgrupos"></div>
+    <button type="button" id="limpiar" hidden>Quitar filtros</button>
+  </div>
+  <div class="fwrap">
+    <select id="fTipo" aria-label="Tipo" hidden></select>
+    <select id="fDisp" aria-label="Entrega"></select>
+    <select id="fColor" aria-label="Color"></select>
+    <select id="fTalla" aria-label="Talla"></select>
+    <select id="fPara" aria-label="Para"></select>
+    <select id="orden" aria-label="Orden"><option value="nombre">Nombre</option><option value="menor">Menor precio</option><option value="mayor">Mayor precio</option></select>
+  </div>
+</div>
+<main><div class="grid" id="grid"></div><article id="hoja" hidden></article></main>
+<div class="barra"><div><b id="resumen">Tu pedido está vacío</b><span id="subbar">Elige una prenda para empezar</span></div><button type="button" id="ver">Ver pedido</button></div>
+<div class="velo" id="velo" hidden><div class="panel" id="panel"></div></div>
+<div class="luz" id="luz" hidden><button type="button" id="cerrarLuz" aria-label="Cerrar">×</button><img id="luzImg" alt=""></div>
+<div class="toast" id="toast" hidden><span id="toastTxt"></span><button type="button" id="toastIr">Ver pedido</button></div>
+<script>
+const ITEMS=[{"id": 320, "nombre": "Uniforme táctico verde oliva 01", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-001.png?v=1792863802"}, {"id": 321, "nombre": "Uniforme táctico verde oliva 02", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-002.png?v=1792863802"}, {"id": 322, "nombre": "Uniforme táctico verde oliva 03", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-003.png?v=1792863803"}, {"id": 323, "nombre": "Uniforme táctico verde oliva 04", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-004.png?v=1792863803"}, {"id": 324, "nombre": "Uniforme táctico verde oliva 05", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-005.png?v=1792863803"}, {"id": 325, "nombre": "Uniforme táctico verde oliva 06", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-006.png?v=1792863803"}, {"id": 326, "nombre": "Uniforme táctico verde oliva 07", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-007.png?v=1792863803"}, {"id": 327, "nombre": "Uniforme táctico verde oliva 08", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-008.png?v=1792863803"}, {"id": 328, "nombre": "Uniforme táctico verde oliva 09", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-009.png?v=1792863803"}, {"id": 329, "nombre": "Uniforme táctico verde oliva 10", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-010.png?v=1792863803"}, {"id": 330, "nombre": "Uniforme táctico verde oliva 11", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-011.png?v=1792863803"}, {"id": 331, "nombre": "Uniforme táctico verde oliva 12", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-012.png?v=1792863803"}, {"id": 332, "nombre": "Uniforme táctico verde oliva 13", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-013.png?v=1792863803"}, {"id": 333, "nombre": "Uniforme táctico verde oliva 14", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-014.png?v=1792863803"}, {"id": 334, "nombre": "Uniforme táctico verde oliva 15", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-015.png?v=1792863803"}, {"id": 335, "nombre": "Uniforme táctico verde oliva 16", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-016.png?v=1792863803"}, {"id": 336, "nombre": "Uniforme táctico verde oliva 17", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-017.png?v=1792863803"}, {"id": 337, "nombre": "Uniforme táctico verde oliva 18", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-018.png?v=1792863803"}, {"id": 338, "nombre": "Uniforme táctico verde oliva 19", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-019.png?v=1792863803"}, {"id": 339, "nombre": "Uniforme táctico verde oliva 20", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-020.png?v=1792863803"}, {"id": 340, "nombre": "Uniforme táctico verde oliva 21", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-021.png?v=1792863804"}, {"id": 341, "nombre": "Uniforme táctico verde oliva 22", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-022.png?v=1792863804"}, {"id": 342, "nombre": "Uniforme táctico verde oliva 23", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-023.png?v=1792863804"}, {"id": 343, "nombre": "Uniforme táctico verde oliva 24", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-024.png?v=1792863804"}, {"id": 344, "nombre": "Uniforme táctico verde oliva 25", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-025.png?v=1792863804"}, {"id": 345, "nombre": "Uniforme táctico verde oliva 26", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-026.png?v=1792863804"}, {"id": 346, "nombre": "Uniforme táctico verde oliva 27", "tipo": "Tácticos verde oliva", "colores": "Verde oliva", "tallas": "", "descripcion": "Diseño de la línea Tácticos verde oliva. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-oliva-027.png?v=1792863804"}, {"id": 347, "nombre": "Uniforme táctico verde manzana 01", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-001.png?v=1792863804"}, {"id": 348, "nombre": "Uniforme táctico verde manzana 02", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-002.png?v=1792863804"}, {"id": 349, "nombre": "Uniforme táctico verde manzana 03", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-003.png?v=1792863804"}, {"id": 350, "nombre": "Uniforme táctico verde manzana 04", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-004.png?v=1792863804"}, {"id": 351, "nombre": "Uniforme táctico verde manzana 10", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-005-p1.png?v=1792863804"}, {"id": 352, "nombre": "Uniforme táctico verde manzana 06", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-006.png?v=1792863804"}, {"id": 353, "nombre": "Uniforme táctico verde manzana 07", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-007.png?v=1792863804"}, {"id": 354, "nombre": "Uniforme táctico verde manzana 08", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-008.png?v=1792863804"}, {"id": 355, "nombre": "Uniforme táctico verde manzana 09", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-009.png?v=1792863804"}, {"id": 356, "nombre": "Uniforme táctico tono 511 01", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-001.png?v=1792863804"}, {"id": 357, "nombre": "Uniforme táctico tono 511 02", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-002.png?v=1792863805"}, {"id": 358, "nombre": "Uniforme táctico tono 511 03", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-003.png?v=1792863805"}, {"id": 359, "nombre": "Uniforme táctico tono 511 04", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-004.png?v=1792863805"}, {"id": 360, "nombre": "Uniforme táctico tono 511 05", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-005.png?v=1792863805"}, {"id": 361, "nombre": "Uniforme táctico tono 511 06", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-006.png?v=1792863805"}, {"id": 362, "nombre": "Uniforme táctico tono 511 13", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-007-p1-s1.png?v=1792863805"}, {"id": 363, "nombre": "Uniforme táctico tono 511 08", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-008.png?v=1792863805"}, {"id": 364, "nombre": "Uniforme táctico tono 511 09", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-009.png?v=1792863805"}, {"id": 365, "nombre": "Uniforme táctico tono 511 10", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-010.png?v=1792863805"}, {"id": 366, "nombre": "Deportivo 45", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-001-s1.png?v=1792863805"}, {"id": 367, "nombre": "Deportivo 47", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-002-s1.png?v=1792864066"}, {"id": 368, "nombre": "Deportivo 03", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-003.png?v=1792963173"}, {"id": 369, "nombre": "Deportivo 04", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-004.png?v=1792863805"}, {"id": 370, "nombre": "Deportivo 05", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-005.png?v=1792863805"}, {"id": 371, "nombre": "Deportivo 49", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-006-s1.png?v=1792864148"}, {"id": 372, "nombre": "Deportivo 07", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-007.png?v=1792863805"}, {"id": 373, "nombre": "Deportivo 51", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-008-s1.png?v=1792864148"}, {"id": 374, "nombre": "Deportivo 53", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-009-s1.png?v=1792864149"}, {"id": 375, "nombre": "Deportivo 10", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-010.png?v=1792863805"}, {"id": 376, "nombre": "Deportivo 11", "tipo": "Deportivos", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-011.png?v=1792963174"}, {"id": 377, "nombre": "Deportivo 12", "tipo": "Deportivos", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-012.png?v=1792863806"}, {"id": 378, "nombre": "Deportivo 55", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-013-s1.png?v=1792864149"}, {"id": 379, "nombre": "Deportivo 14", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-014.png?v=1792963174"}, {"id": 380, "nombre": "Deportivo 15", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-015.png?v=1792863806"}, {"id": 381, "nombre": "Deportivo 16", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-016.png?v=1792863806"}, {"id": 382, "nombre": "Deportivo 57", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-017-s1.png?v=1792864150"}, {"id": 383, "nombre": "Deportivo 37", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-018-p1.png?v=1792863806"}, {"id": 384, "nombre": "Deportivo 19", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-019.png?v=1792864066"}, {"id": 385, "nombre": "Deportivo 20", "tipo": "Deportivos", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-020.png?v=1792864066"}, {"id": 386, "nombre": "Deportivo 21", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-021.png?v=1792863806"}, {"id": 387, "nombre": "Deportivo 22", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-022.png?v=1792863806"}, {"id": 388, "nombre": "Deportivo 23", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-023.png?v=1792863806"}, {"id": 389, "nombre": "Deportivo 24", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-024.png?v=1792863806"}, {"id": 390, "nombre": "Deportivo 25", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-025.png?v=1792863806"}, {"id": 391, "nombre": "Deportivo 26", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-026.png?v=1792863807"}, {"id": 392, "nombre": "Deportivo 27", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-027.png?v=1792863807"}, {"id": 393, "nombre": "Deportivo 39", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-028-p1.png?v=1792863807"}, {"id": 394, "nombre": "Deportivo 29", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-029.png?v=1792863807"}, {"id": 395, "nombre": "Deportivo 30", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-030.png?v=1792863807"}, {"id": 396, "nombre": "Deportivo 31", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-031.png?v=1792864066"}, {"id": 397, "nombre": "Deportivo 59", "tipo": "Deportivos", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-032-s1.png?v=1792864204"}, {"id": 398, "nombre": "Deportivo 61", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-033-p1-s1.png?v=1792863807"}, {"id": 399, "nombre": "Deportivo 43", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-034-p1.png?v=1792863807"}, {"id": 400, "nombre": "Deportivo 35", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-035.png?v=1792863807"}, {"id": 401, "nombre": "Deportivo 36", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-036.png?v=1792863807"}, {"id": 402, "nombre": "Esquema 62", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-001-p1-s1.png?v=1792863807"}, {"id": 403, "nombre": "Esquema 02", "tipo": "Esquemas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-002.png?v=1792863807"}, {"id": 404, "nombre": "Esquema 03", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-003.png?v=1792863807"}, {"id": 405, "nombre": "Esquema 04", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-004.png?v=1792863807"}, {"id": 406, "nombre": "Esquema 05", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-005.png?v=1792863807"}, {"id": 407, "nombre": "Esquema 06", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-006.png?v=1792863807"}, {"id": 408, "nombre": "Esquema 07", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-007.png?v=1792863807"}, {"id": 409, "nombre": "Esquema 08", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-008.png?v=1792863808"}, {"id": 410, "nombre": "Esquema 09", "tipo": "Esquemas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-009.png?v=1792863808"}, {"id": 411, "nombre": "Esquema 10", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-010.png?v=1792863808"}, {"id": 412, "nombre": "Esquema 11", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-011.png?v=1792863808"}, {"id": 413, "nombre": "Esquema 12", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-012.png?v=1792863808"}, {"id": 414, "nombre": "Esquema 13", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-013.png?v=1792863808"}, {"id": 415, "nombre": "Esquema 14", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-014.png?v=1792863808"}, {"id": 416, "nombre": "Esquema 15", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-015.png?v=1792863808"}, {"id": 417, "nombre": "Esquema 16", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-016.png?v=1792863808"}, {"id": 418, "nombre": "Esquema 17", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-017.png?v=1792863808"}, {"id": 419, "nombre": "Esquema 18", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-018.png?v=1792863808"}, {"id": 420, "nombre": "Esquema 19", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-019.png?v=1792863808"}, {"id": 421, "nombre": "Esquema 20", "tipo": "Esquemas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-020.png?v=1792863808"}, {"id": 422, "nombre": "Esquema 21", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-021.png?v=1792863808"}, {"id": 423, "nombre": "Esquema 22", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-022.png?v=1792863808"}, {"id": 424, "nombre": "Esquema 23", "tipo": "Esquemas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-023.png?v=1792863809"}, {"id": 425, "nombre": "Esquema 24", "tipo": "Esquemas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-024.png?v=1792863809"}, {"id": 426, "nombre": "Esquema 25", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-025.png?v=1792863809"}, {"id": 427, "nombre": "Esquema 26", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-026.png?v=1792863809"}, {"id": 428, "nombre": "Esquema 51", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-027-s1.png?v=1792863809"}, {"id": 429, "nombre": "Esquema 59", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-028-s1.png?v=1792863809"}, {"id": 431, "nombre": "Esquema 47", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-030-p1.png?v=1792863809"}, {"id": 432, "nombre": "Esquema 31", "tipo": "Esquemas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-031.png?v=1792863809"}, {"id": 433, "nombre": "Esquema 32", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-032.png?v=1792863809"}, {"id": 434, "nombre": "Esquema 33", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-033.png?v=1792863809"}, {"id": 435, "nombre": "Esquema 34", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-034.png?v=1792863809"}, {"id": 436, "nombre": "Esquema 35", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-035.png?v=1792863809"}, {"id": 437, "nombre": "Esquema 36", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-036.png?v=1792863809"}, {"id": 438, "nombre": "Esquema 37", "tipo": "Esquemas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-037.png?v=1792863809"}, {"id": 439, "nombre": "Esquema 38", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-038.png?v=1792863809"}, {"id": 440, "nombre": "Esquema 39", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-039.png?v=1792863809"}, {"id": 441, "nombre": "Esquema 40", "tipo": "Esquemas", "colores": "Café", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-040.png?v=1792863809"}, {"id": 442, "nombre": "Esquema 41", "tipo": "Esquemas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-041.png?v=1792863809"}, {"id": 443, "nombre": "Esquema 42", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-042.png?v=1792863809"}, {"id": 444, "nombre": "Esquema 43", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-043.png?v=1792863809"}, {"id": 445, "nombre": "Esquema 44", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-044.png?v=1792863809"}, {"id": 446, "nombre": "Bota táctica 01", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-001.png?v=1792863809"}, {"id": 447, "nombre": "Bota táctica 02", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-002.png?v=1792863809"}, {"id": 448, "nombre": "Bota táctica 03", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-003.png?v=1792863809"}, {"id": 449, "nombre": "Bota táctica 04", "tipo": "Botas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-004.png?v=1792863809"}, {"id": 450, "nombre": "Bota táctica 05", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-005.png?v=1792863810"}, {"id": 451, "nombre": "Bota táctica 06", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-006.png?v=1792863810"}, {"id": 452, "nombre": "Bota táctica 07", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-007.png?v=1792863810"}, {"id": 453, "nombre": "Bota táctica 08", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-008.png?v=1792863810"}, {"id": 454, "nombre": "Bota táctica 09", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-009.png?v=1792863810"}, {"id": 455, "nombre": "Bota táctica 10", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-010.png?v=1792863810"}, {"id": 456, "nombre": "Bota táctica 11", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-011.png?v=1792863810"}, {"id": 457, "nombre": "Bota táctica 12", "tipo": "Botas", "colores": "Rojo", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-012.png?v=1792863810"}, {"id": 458, "nombre": "Bota táctica 13", "tipo": "Botas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-013.png?v=1792863810"}, {"id": 459, "nombre": "Bota táctica 14", "tipo": "Botas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-014.png?v=1792863810"}, {"id": 460, "nombre": "Bota táctica 15", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-015.png?v=1792863810"}, {"id": 461, "nombre": "Bota táctica 25", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-016-s1.png?v=1792863810"}, {"id": 462, "nombre": "Bota táctica 17", "tipo": "Botas", "colores": "Rojo", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-017.png?v=1792863810"}, {"id": 463, "nombre": "Bota táctica 18", "tipo": "Botas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-018.png?v=1792863810"}, {"id": 464, "nombre": "Bota táctica 19", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-019.png?v=1792863810"}, {"id": 465, "nombre": "Bota táctica 27", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-020-s1.png?v=1792863810"}, {"id": 466, "nombre": "Bota táctica 21", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-021.png?v=1792863810"}, {"id": 467, "nombre": "Bota táctica 22", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-022.png?v=1792863811"}, {"id": 468, "nombre": "Bota táctica 23", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-023.png?v=1792863811"}, {"id": 469, "nombre": "Bota táctica 24", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-024.png?v=1792863811"}, {"id": 470, "nombre": "Toalla de microfibra 01", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-001.png?v=1792863811"}, {"id": 471, "nombre": "Toalla de microfibra 02", "tipo": "Toallas en microfibra personalizadas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-002.png?v=1792863811"}, {"id": 472, "nombre": "Toalla de microfibra 03", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-003.png?v=1792863811"}, {"id": 473, "nombre": "Toalla de microfibra 04", "tipo": "Toallas en microfibra personalizadas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-004.png?v=1792863811"}, {"id": 474, "nombre": "Toalla de microfibra 05", "tipo": "Toallas en microfibra personalizadas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-005.png?v=1792863811"}, {"id": 475, "nombre": "Toalla de microfibra 06", "tipo": "Toallas en microfibra personalizadas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-006.png?v=1792863811"}, {"id": 476, "nombre": "Toalla de microfibra 07", "tipo": "Toallas en microfibra personalizadas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-007.png?v=1792863811"}, {"id": 477, "nombre": "Toalla de microfibra 08", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-008.png?v=1792863811"}, {"id": 478, "nombre": "Toalla de microfibra 09", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-009.png?v=1792863811"}, {"id": 479, "nombre": "Toalla de microfibra 10", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-010.png?v=1792863812"}, {"id": 480, "nombre": "Toalla de microfibra 11", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-011.png?v=1792863812"}, {"id": 481, "nombre": "Toalla de microfibra 12", "tipo": "Toallas en microfibra personalizadas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-012.png?v=1792863812"}, {"id": 482, "nombre": "Toalla de microfibra 13", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-013.png?v=1792863812"}, {"id": 483, "nombre": "Toalla de microfibra 14", "tipo": "Toallas en microfibra personalizadas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-014.png?v=1792863812"}, {"id": 484, "nombre": "Toalla de microfibra 15", "tipo": "Toallas en microfibra personalizadas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-015.png?v=1792863812"}, {"id": 485, "nombre": "Toalla de microfibra 16", "tipo": "Toallas en microfibra personalizadas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-016.png?v=1792863812"}, {"id": 486, "nombre": "Toalla de microfibra 17", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-017.png?v=1792863812"}, {"id": 487, "nombre": "Toalla de microfibra 18", "tipo": "Toallas en microfibra personalizadas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-018.png?v=1792863813"}, {"id": 488, "nombre": "Toalla de microfibra 19", "tipo": "Toallas en microfibra personalizadas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-019.png?v=1792863813"}, {"id": 489, "nombre": "Toalla de microfibra 20", "tipo": "Toallas en microfibra personalizadas", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-020.png?v=1792863813"}, {"id": 490, "nombre": "Toalla de microfibra 21", "tipo": "Toallas en microfibra personalizadas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-021.png?v=1792863813"}, {"id": 491, "nombre": "Toalla de microfibra 22", "tipo": "Toallas en microfibra personalizadas", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Toallas en microfibra personalizadas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-toalla-022.png?v=1792863813"}, {"id": 492, "nombre": "Buzo licrado 01", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-001.png?v=1792863813"}, {"id": 493, "nombre": "Buzo licrado 02", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-002.png?v=1792863813"}, {"id": 494, "nombre": "Buzo licrado 03", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-003.png?v=1792863813"}, {"id": 495, "nombre": "Buzo licrado 04", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-004.png?v=1792863813"}, {"id": 496, "nombre": "Buzo licrado 05", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-005.png?v=1792863813"}, {"id": 497, "nombre": "Buzo licrado 06", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-006.png?v=1792863813"}, {"id": 498, "nombre": "Buzo licrado 07", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-007.png?v=1792863813"}, {"id": 499, "nombre": "Buzo licrado 08", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-008.png?v=1792863813"}, {"id": 500, "nombre": "Buzo licrado 09", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-009.png?v=1792863814"}, {"id": 501, "nombre": "Buzo licrado 10", "tipo": "Buzos licrados", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-010.png?v=1792863814"}, {"id": 502, "nombre": "Buzo licrado 11", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-011.png?v=1792863814"}, {"id": 503, "nombre": "Buzo licrado 12", "tipo": "Buzos licrados", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-012.png?v=1792863814"}, {"id": 504, "nombre": "Buzo licrado 13", "tipo": "Buzos licrados", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Buzos licrados. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-buzo-013.png?v=1792863814"}, {"id": 505, "nombre": "Producto Milfort 01", "tipo": "Productos Milfort", "colores": "Rojo", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-001.png?v=1792863814"}, {"id": 506, "nombre": "Producto Milfort 02", "tipo": "Productos Milfort", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-002.png?v=1792863814"}, {"id": 507, "nombre": "Producto Milfort 03", "tipo": "Productos Milfort", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-003.png?v=1792863814"}, {"id": 508, "nombre": "Producto Milfort 04", "tipo": "Productos Milfort", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-004.png?v=1792863814"}, {"id": 509, "nombre": "Producto Milfort 05", "tipo": "Productos Milfort", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-005.png?v=1792863814"}, {"id": 510, "nombre": "Producto Milfort 06", "tipo": "Productos Milfort", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-006.png?v=1792863814"}, {"id": 511, "nombre": "Producto Milfort 07", "tipo": "Productos Milfort", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-007.png?v=1792863814"}, {"id": 512, "nombre": "Producto Milfort 08", "tipo": "Productos Milfort", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-008.png?v=1792863814"}, {"id": 513, "nombre": "Producto Milfort 09", "tipo": "Productos Milfort", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Productos Milfort. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-mil-009.png?v=1792863814"}, {"id": 514, "nombre": "Esquema 64", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-001-p2-s1.png?v=1792863814"}, {"id": 515, "nombre": "Esquema 48", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-030-p2.png?v=1792863814"}, {"id": 516, "nombre": "Deportivo 38", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-018-p2.png?v=1792863814"}, {"id": 517, "nombre": "Deportivo 40", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-028-p2.png?v=1792863814"}, {"id": 518, "nombre": "Deportivo 64", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-033-p2-s1.png?v=1792863814"}, {"id": 519, "nombre": "Deportivo 44", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-034-p2.png?v=1792863815"}, {"id": 520, "nombre": "Uniforme táctico verde manzana 11", "tipo": "Táctico verde manzana", "colores": "Verde manzana", "tallas": "", "descripcion": "Diseño de la línea Táctico verde manzana. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-manzana-005-p2.png?v=1792863815"}, {"id": 521, "nombre": "Uniforme táctico tono 511 12", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-007-p2.png?v=1792863815"}, {"id": 522, "nombre": "Esquema 50", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-029.png?v=1792863815"}, {"id": 523, "nombre": "Esquema 52", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-027-s2.png?v=1792863815"}, {"id": 524, "nombre": "Esquema 53", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-027-s3.png?v=1792863815"}, {"id": 525, "nombre": "Esquema 54", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-027-s4.png?v=1792863815"}, {"id": 526, "nombre": "Esquema 55", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-027-s5.png?v=1792863815"}, {"id": 527, "nombre": "Esquema 56", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-027-s6.png?v=1792863815"}, {"id": 528, "nombre": "Esquema 57", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-027-s7.png?v=1792863815"}, {"id": 529, "nombre": "Esquema 58", "tipo": "Esquemas", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-027-s8.png?v=1792863815"}, {"id": 530, "nombre": "Esquema 60", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-028-s2.png?v=1792863815"}, {"id": 531, "nombre": "Esquema 61", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-028-s3.png?v=1792863815"}, {"id": 532, "nombre": "Esquema 63", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-001-p1-s2.png?v=1792863815"}, {"id": 533, "nombre": "Esquema 65", "tipo": "Esquemas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Esquemas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-esq-001-p2-s2.png?v=1792863815"}, {"id": 534, "nombre": "Deportivo 46", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-001-s2.png?v=1792863815"}, {"id": 535, "nombre": "Deportivo 48", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-002-s2.png?v=1792864066"}, {"id": 536, "nombre": "Deportivo 50", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-006-s2.png?v=1792864148"}, {"id": 537, "nombre": "Deportivo 52", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-008-s2.png?v=1792864148"}, {"id": 538, "nombre": "Deportivo 54", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-009-s2.png?v=1792864149"}, {"id": 539, "nombre": "Deportivo 56", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-013-s2.png?v=1792864150"}, {"id": 540, "nombre": "Deportivo 58", "tipo": "Deportivos", "colores": "Azul", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-017-s2.png?v=1792864150"}, {"id": 541, "nombre": "Deportivo 60", "tipo": "Deportivos", "colores": "Gris", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-032-s2.png?v=1792864204"}, {"id": 542, "nombre": "Deportivo 62", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-033-p1-s2.png?v=1792863815"}, {"id": 543, "nombre": "Deportivo 63", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-033-p1-s3.png?v=1792863815"}, {"id": 544, "nombre": "Deportivo 65", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-033-p2-s2.png?v=1792863815"}, {"id": 545, "nombre": "Deportivo 66", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-033-p2-s3.png?v=1792863815"}, {"id": 546, "nombre": "Deportivo 67", "tipo": "Deportivos", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Deportivos. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-dep-033-p2-s4.png?v=1792863815"}, {"id": 547, "nombre": "Bota táctica 26", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-016-s2.png?v=1792863815"}, {"id": 548, "nombre": "Bota táctica 28", "tipo": "Botas", "colores": "Negro", "tallas": "", "descripcion": "Diseño de la línea Botas. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-bota-020-s2.png?v=1792863815"}, {"id": 549, "nombre": "Uniforme táctico tono 511 14", "tipo": "Táctico tono 511", "colores": "Verde", "tallas": "", "descripcion": "Diseño de la línea Táctico tono 511. El logo, la talla y el precio se confirman al pedir.", "disponibilidad": "Personalizado", "precio": "", "imagen": "/HOBA-IMPACT/c/img/cat-tono511-007-p1-s2.png?v=1792863815"}];
+const CFG={"estilos": {"tinta": "#000000", "rojo": "#C8102E", "fondo": "#f3efe6", "tarjeta": "#ffffff", "texto": "#161616"}, "categorias": ["Tácticos verde oliva", "Táctico verde manzana", "Táctico tono 511", "Deportivos", "Esquemas", "Botas", "Toallas en microfibra personalizadas", "Buzos licrados", "Productos Milfort"], "menus": [{"id": "inicio", "titulo": "Inicio", "destino": "inicio", "visible": true}, {"id": "catalogo", "titulo": "Catálogo", "destino": "catalogo", "visible": true}, {"id": "toalla", "titulo": "Tu toalla", "destino": "toalla", "visible": true}, {"id": "bordado", "titulo": "Bordado", "destino": "bordado", "visible": true}, {"id": "entrega", "titulo": "Entrega", "destino": "entrega", "visible": true}, {"id": "contacto", "titulo": "Contacto", "destino": "contacto", "visible": true}, {"id": "panel", "titulo": "Panel", "destino": "panel", "visible": true}], "paginas": {"inicio": {"kicker": "HOBA IMPACTO SAS · TULUÁ", "titulo": "Uniforme táctico para el turno.", "lead": "Camisa, pantalón cargo, chaleco y bordado directo. Eliges en el catálogo o escribes por WhatsApp. El pedido entra al sistema del equipo.", "hero": true, "categorias": true, "tienda": true}, "pedir": {"ojo": "CÓMO PEDIR", "titulo": "De la ficha al uniforme", "pasos": [{"t": "Elige", "p": "Abres la prenda, talla, color y cantidad. O lo escribes por WhatsApp."}, {"t": "Cotización", "p": "Queda en el sistema. El asesor confirma bordado, ciudad y entrega."}, {"t": "Abono 50%", "p": "Con eso se aparta. El comprobante se compara con el banco."}, {"t": "Entrega", "p": "Corte, taller, revisión y empaque. En Tuluá lo llevamos nosotros."}], "faq": [{"q": "¿El precio de la ficha es el definitivo?", "a": "Es de referencia. La cotización confirma cantidad, bordado y el abono del 50%."}, {"q": "¿Cuándo llega?", "a": "Con tela en bodega, al día siguiente. Sobre pedido, entre 15 y 20 días."}, {"q": "¿Qué cubre la garantía?", "a": "Un daño de producción, durante dos meses desde la salida."}]}, "bordado": {"ojo": "BORDADO", "titulo": "Bordado personalizado, directo en la prenda.", "texto": "El par de bordados es el ejemplo: el nombre con el rango, o el juego de la institución. El tuyo se hace con tu nombre, tu grado, tu fecha o tu unidad.", "nota": "Si es estándar y hay tela, la entrega queda para el día siguiente.", "nota2": "Si se fabrica sobre pedido, queda entre 15 y 20 días. El 50% aparta la venta a cualquier hora."}, "entrega": {"ojo": "ENTREGA", "titulo": "Tuluá y el resto del país", "c1t": "En Tuluá", "c1p": "La entrega la hace el equipo. Deja la dirección al pedir.", "c2t": "Fuera de Tuluá", "c2p": "Sale con Interrapidísimo cuando el pago está completo."}, "contacto": {"ojo": "CONTACTO", "titulo": "Deja el uniforme.", "texto": "La consulta queda como cotización. El asesor la ve en el sistema."}}, "libres": []};
+const MODO='prenda';
+const PRENDA=+('499');
+const WA='573155813545';
+const PIG={
+  'azul oscuro':'#1e3a5f','negro':'#111827','gris':'#6b7280','caqui':'#a89060','naranja':'#ea580c',
+  'amarillo':'#eab308','dorado':'#c6a15b','plateado':'#d5d8de','blanco':'#f8fafc','verde oliva':'#556b2f',
+  'verde':'#3f6212','verde manzana':'#7cb342','rojo':'#b91c1c','azul':'#2563eb','beige':'#d6c4a8','cafe':'#6f4e37','camuflado':'#4d5a32'
+};
+const ORDEN=['XS','S','M','L','XL','XXL','XXXL','Única','Unica','28','30','32','34','36','38','40','42','44','46'];
+const F={tipo:'',disp:'',color:'',talla:'',para:''};
+let carro=[];
+try{carro=JSON.parse(sessionStorage.getItem('hoba-carro')||'[]');if(!Array.isArray(carro))carro=[]}catch(e){carro=[]}
+let ficha=null, eleccion=null, pedido=false, toastT=0;
+const $=s=>document.querySelector(s);
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function money(n){return '$'+Math.round(+n||0).toLocaleString('es-CO')}
+function lista(t){return String(t||'').split(',').map(s=>s.trim()).filter(Boolean)}
+function plano(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
+function paraDe(it){const n=plano(it.nombre);if(n.includes('mujer'))return 'Mujer';if(n.includes('hombre'))return 'Hombre';return 'Unisex'}
+function pigmento(c){return PIG[plano(c)]||''}
+function rotuloColor(c){return plano(c)==='el color del logo'?'Color del logo':c}
+function tallasDe(it){const t=lista(it.tallas);return t.length?t:['Única']}
+function coloresDe(it){return lista(it.colores)}
+function guardar(){sessionStorage.setItem('hoba-carro',JSON.stringify(carro))}
+function clave(x){return [x.id,x.talla,x.color,x.genero].join('|')}
+function unidades(){return carro.reduce((a,x)=>a+(+x.cantidad||0),0)}
+function total(){return carro.reduce((a,x)=>a+(+x.precio||0)*(+x.cantidad||0),0)}
+function ordenTalla(a,b){const ia=ORDEN.indexOf(a),ib=ORDEN.indexOf(b);if(ia<0&&ib<0)return a.localeCompare(b,'es');if(ia<0)return 1;if(ib<0)return -1;return ia-ib}
+function unicos(fn){const m=new Map();ITEMS.forEach(it=>fn(it).forEach(v=>{if(v)m.set(v,1)}));return [...m.keys()]}
+function coincide(it){
+  if(F.tipo&&it.tipo!==F.tipo)return false;
+  if(F.disp&&it.disponibilidad!==F.disp)return false;
+  if(F.color&&!coloresDe(it).some(c=>plano(c)===plano(F.color)))return false;
+  if(F.talla&&!tallasDe(it).some(t=>t===F.talla))return false;
+  if(F.para&&paraDe(it)!==F.para)return false;
+  const q=plano($('#q').value);
+  if(!q)return true;
+  const bolsa=plano([it.nombre,it.tipo,it.descripcion,it.colores,it.tallas,it.disponibilidad].join(' '));
+  return q.split(/\s+/).every(p=>bolsa.includes(p));
+}
+function visibles(){
+  const rows=ITEMS.filter(coincide);
+  const o=$('#orden').value;
+  rows.sort((a,b)=>{
+    if(o==='menor')return (+a.precio||9e15)-(+b.precio||9e15)||a.nombre.localeCompare(b.nombre,'es');
+    if(o==='mayor')return (+b.precio||0)-(+a.precio||0)||a.nombre.localeCompare(b.nombre,'es');
+    return String(a.nombre||'').localeCompare(String(b.nombre||''),'es');
+  });
+  return rows;
+}
+function opciones(id,pares){
+  $(id).innerHTML=pares.map(([v,t])=>'<option value="'+esc(v)+'">'+esc(t)+'</option>').join('');
+}
+function armarFiltros(){
+  const oficiales=(CFG&&CFG.categorias)||[];
+  const extras=unicos(it=>it.tipo?[it.tipo]:[]).filter(v=>oficiales.indexOf(v)<0);
+  opciones('#fTipo',[['', 'Categoría']].concat(oficiales.map(v=>[v,v])).concat(extras.map(v=>[v,v])));
+  opciones('#fDisp',[['', 'Entrega']].concat(unicos(it=>it.disponibilidad?[it.disponibilidad]:[]).map(v=>[v,v])));
+  opciones('#fColor',[['', 'Color']].concat(unicos(it=>coloresDe(it)).map(v=>[v,rotuloColor(v)])));
+  opciones('#fTalla',[['', 'Talla']].concat(unicos(it=>tallasDe(it)).sort(ordenTalla).map(v=>[v,v])));
+  opciones('#fPara',[['', 'Para'],['Hombre','Hombre'],['Mujer','Mujer'],['Unisex','Unisex']]);
+}
+function leerFiltros(){
+  F.tipo=$('#fTipo').value;F.disp=$('#fDisp').value;F.color=$('#fColor').value;F.talla=$('#fTalla').value;F.para=$('#fPara').value;
+}
+function chica(src){return String(src||'').replace('/HOBA-IMPACT/c/img/','/HOBA-IMPACT/c/img/m-').replace(/\.png/g,'.jpg')}
+function idDeFoto(src){
+  const m=String(src||'').match(/\/c\/img\/(cat-[a-z0-9-]+)\.png/i);
+  return m?m[1].replace(/^cat-/,'').replace(/-/g,''):'';
+}
+/*MANIQUIES*/
+const MANIQUIES={bota001:1,bota002:1,bota003:1,bota004:1,bota005:1,bota006:1,bota007:1,bota008:1,bota009:1,bota010:1,bota011:1,bota012:1,bota013:1,bota014:1,bota015:1,bota016s1:1,bota016s2:1,bota017:1,bota018:1,bota019:1,bota020s1:1,bota020s2:1,bota021:1,bota022:1,bota023:1,bota024:1,buzo001:1,buzo002:1,buzo003:1,buzo004:1,buzo005:1,buzo006:1,buzo007:1,buzo008:1,buzo009:1,buzo010:1,buzo011:1,buzo012:1,buzo013:1,dep001s1:1,dep001s2:1,dep002s1:1,dep002s2:1,dep003:1,dep004:1,dep005:1,dep006s1:1,dep006s2:1,dep007:1,dep008s1:1,dep008s2:1,dep009s1:1,dep009s2:1,dep010:1,dep011:1,dep012:1,dep013s1:1,dep013s2:1,dep014:1,dep015:1,dep016:1,dep017s1:1,dep017s2:1,dep018p1:1,dep018p2:1,dep019:1,dep020:1,dep021:1,dep022:1,dep023:1,dep024:1,dep025:1,dep026:1,dep027:1,dep028p1:1,dep028p2:1,dep029:1,dep030:1,dep031:1,dep032s1:1,dep032s2:1,dep033p1s1:1,dep033p1s2:1,dep033p1s3:1,dep033p2s1:1,dep033p2s2:1,dep033p2s3:1,dep033p2s4:1,dep034p1:1,dep034p2:1,dep035:1,dep036:1,esq001p1s1:1,esq001p1s2:1,esq001p2s1:1,esq001p2s2:1,esq002:1,esq003:1,esq004:1,esq005:1,esq006:1,esq007:1,esq008:1,esq009:1,esq010:1,esq011:1,esq012:1,esq013:1,esq014:1,esq015:1,esq016:1,esq017:1,esq018:1,esq019:1,esq020:1,esq021:1,esq022:1,esq023:1,esq024:1,esq025:1,esq026:1,esq027s1:1,esq027s2:1,esq027s3:1,esq027s4:1,esq027s5:1,esq027s6:1,esq027s7:1,esq027s8:1,esq028s1:1,esq028s2:1,esq028s3:1,esq029:1,esq030p1:1,esq030p2:1,esq031:1,esq032:1,esq033:1,esq034:1,esq035:1,esq036:1,esq037:1,esq038:1,esq039:1,esq040:1,esq041:1,esq042:1,esq043:1,esq044:1,manzana001:1,manzana002:1,manzana003:1,manzana004:1,manzana005p1:1,manzana005p2:1,manzana006:1,manzana007:1,manzana008:1,manzana009:1,mil001:1,mil002:1,mil003:1,mil004:1,mil005:1,mil006:1,mil007:1,mil008:1,mil009:1,oliva001:1,oliva002:1,oliva003:1,oliva004:1,oliva005:1,oliva006:1,oliva007:1,oliva008:1,oliva009:1,oliva010:1,oliva011:1,oliva012:1,oliva013:1,oliva014:1,oliva015:1,oliva016:1,oliva017:1,oliva018:1,oliva019:1,oliva020:1,oliva021:1,oliva022:1,oliva023:1,oliva024:1,oliva025:1,oliva026:1,oliva027:1,tono511001:1,tono511002:1,tono511003:1,tono511004:1,tono511005:1,tono511006:1,tono511007p1s1:1,tono511007p1s2:1,tono511007p2:1,tono511008:1,tono511009:1,tono511010:1};
+/*FINMANIQUIES*/
+function vitrina(src){
+  const id=idDeFoto(src);
+  return id&&MANIQUIES[id]?'/HOBA-IMPACT/inicio/img/web-g-'+id+'-01.jpg?v=1':'';
+}
+function fotoHtml(it,cls,grande){
+  if(it.imagen){
+    const frente=grande?'':vitrina(it.imagen);
+    const src=frente||(grande?it.imagen:chica(it.imagen));
+    return '<img loading="lazy" decoding="async" src="'+esc(src)+'" data-full="'+esc(it.imagen)+'" alt="'+esc(it.nombre)+'"'+ (cls?' class="'+cls+'"':'')+' onerror="if(!this.dataset.re){this.dataset.re=1;this.src=this.dataset.full}">';
+  }
+  return '<div class="letra'+(cls?' '+cls:'')+'">'+esc((it.nombre||'?')[0])+'</div>';
+}
+function pintaGrid(){
+  const rows=visibles();
+  $('#cuenta').textContent=rows.length===1?'1 prenda':rows.length+' prendas';
+  const arma=(/toalla/i.test(F.tipo||'')||/toalla/i.test(($('#q')&&$('#q').value)||''))?'<a class="card arma-card" href="/HOBA-IMPACT/inicio/toalla"><span>Tu toalla</span><b>Arma la tuya</b><small>Color, logo y la ves al momento.</small></a>':'';
+  const cards=rows.map(it=>{
+    const cols=coloresDe(it).slice(0,6);
+    const sello=it.disponibilidad==='Inmediata'?'<span class="sello ahora">Inmediata</span>':(it.disponibilidad?'<span class="sello luego">'+esc(it.disponibilidad)+'</span>':'');
+    return '<button type=button class=card data-id="'+it.id+'"><div class=foto>'+fotoHtml(it)+sello+'</div><div class=cuerpo><small>'+esc(it.tipo||'Referencia')+' · '+esc(paraDe(it))+'</small><h2>'+esc(it.nombre)+'</h2><b class=precio>'+(it.precio?money(it.precio):'Precio al confirmar')+'</b><div class=puntos>'+cols.map(c=>{const p=pigmento(c);return '<i class=punto title="'+esc(c)+'" style="background:'+(p||'#e5e7eb')+'"></i>'}).join('')+'</div></div></button>';
+  }).join('');
+  $('#grid').innerHTML=(arma||cards)?arma+cards:'<div class=vacio><p>'+(F.tipo?'Todavía no hay productos en <b>'+esc(F.tipo)+'</b>.':'Ninguna prenda coincide con esos filtros.')+'</p><button type=button class=chip id=limpiar2>Limpiar filtros</button></div>';
+  marcarLineas();marcarGrupos();
+}
+function pintaBarra(){
+  const n=unidades();
+  $('#resumen').textContent=n?(n+' unidad'+(n===1?'':'es')):'Tu pedido está vacío';
+  $('#subbar').textContent=n?('Referencia '+money(total())):'Elige una prenda para empezar';
+  $('#ver').textContent=n?'Ver pedido':'Ver pedido';
+  $('#ver').disabled=!n;
+  $('#ver').style.opacity=n?1:.55;
+}
+function itemDe(id){return ITEMS.find(x=>+x.id===+id)}
+function anotarVisita(cuerpo){
+  const body=JSON.stringify(cuerpo||{});
+  try{
+    if(navigator.sendBeacon){navigator.sendBeacon('/api/visita', new Blob([body],{type:'application/json'}));return}
+  }catch(e){}
+  fetch('/api/visita',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:body,keepalive:true}).catch(function(){});
+}
+function abrir(id){
+  const it=itemDe(id);if(!it)return;
+  ficha=it;pedido=false;
+  anotarVisita({pagina:'prenda', accion:'ver', producto:it.id, nombre:it.nombre||''});
+  const cols=coloresDe(it),tals=tallasDe(it);
+  eleccion={color:cols[0]||'',talla:tals[0]||'Única',genero:it.tipo==='Parche'?'Unisex':paraDe(it),cantidad:1};
+  const ya=carro.find(x=>clave(x)===clave({id:it.id,...eleccion}));
+  if(ya)eleccion.cantidad=ya.cantidad;
+  $('#panel').className='panel';
+  $('#panel').innerHTML=htmlFicha(it);
+  $('#velo').hidden=false;
+  document.body.style.overflow='hidden';
+  enlazarFicha();
+}
+function vistasDe(src){
+  const m=String(src||'').match(/\/c\/img\/(cat-[a-z0-9-]+)\.png/i);
+  if(!m)return [];
+  const base=m[1].replace(/-s\d+$/,'');
+  const pares=['cat-dep-002','cat-dep-006','cat-dep-008','cat-dep-009','cat-dep-013','cat-dep-017','cat-dep-032','cat-dep-033-p1'];
+  if(pares.indexOf(base)<0)return [];
+  const v=(String(src).match(/[?&]v=(\d+)/)||[])[1]||'';
+  const q=v?('?v='+v):'';
+  const inicio=/-s2\.png/i.test(src)?180:0;
+  return {base:base,inicio:inicio,urls:[1,2].map(function(n){return '/HOBA-IMPACT/c/img/'+base+'-s'+n+'.png'+q})};
+}
+const VUELTA={'cat-dep-007':8};
+function vueltaDe(src){
+  const m=String(src||'').match(/\/c\/img\/(cat-[a-z0-9-]+)\.png/i);
+  if(!m||!VUELTA[m[1]])return null;
+  const id=m[1].replace(/^cat-/,'').replace(/-/g,'');
+  const urls=[];
+  for(let i=1;i<=VUELTA[m[1]];i++)urls.push('/HOBA-IMPACT/inicio/img/web-g-'+id+'-'+(i<10?'0':'')+i+'.jpg?v=1');
+  return {inicio:0,urls:urls,directo:1};
+}
+function htmlGiro(it,giro){
+  return '<div class=visor><div class=giro id=giro data-listo="'+(giro.directo?1:0)+'" tabindex=0 role=slider aria-valuemin=0 aria-valuemax=360 aria-valuenow="'+giro.inicio+'" aria-label="Da la vuelta a la prenda. Arrastra con el dedo o el mouse, o usa las flechas." data-ang="'+giro.inicio+'">'+giro.urls.map(function(u,i){
+    const ver=giro.directo?u:chica(u);
+    const full=giro.directo?u:u;
+    return '<img alt="'+esc(it.nombre)+'" draggable=false decoding=async src="'+esc(ver)+'" data-full="'+esc(full)+'" data-i="'+i+'">';
+  }).join('')+'<p class=pista><span class=aro><i id=aro></i></span>Arrastra para dar la vuelta</p></div><button type=button class=zoom id=zoom>Ver grande</button></div>';
+}
+function esToalla(it){return /toalla/i.test((it&&it.tipo)||'')||/cat-toalla-/i.test((it&&it.imagen)||'')}
+function idGiro(src){
+  const m=String(src||'').match(/\/c\/img\/(cat-[a-z0-9-]+)\.png/i);
+  return m?m[1].replace(/^cat-/,'').replace(/-/g,''):'';
+}
+function htmlPano(it){
+  const src=chica(it.imagen);
+  return '<div class=visor><div class=pano id=pano tabindex=0 role=slider aria-valuemin=0 aria-valuemax=360 aria-valuenow=0 aria-label="Gira la toalla. Arrastra con el dedo o el mouse, o usa las flechas."><div class=pano-escena><div class=pano-giro id=panoGiro><img class=pano-frente alt="'+esc(it.nombre)+'" draggable=false src="'+esc(src)+'"><img class=pano-reverso alt="" draggable=false src="'+esc(src)+'"></div></div><p class=pista><span class=aro><i id=aro></i></span>Arrastra para girar la toalla</p></div><button type=button class=zoom id=zoom>Ver grande</button></div>';
+}
+function htmlVisor(it){
+  if(esToalla(it))return htmlPano(it);
+  const vuelta=it.imagen?vueltaDe(it.imagen):null;
+  if(vuelta)return htmlGiro(it,vuelta);
+  const giro=it.imagen?vistasDe(it.imagen):null;
+  if(!giro||!giro.urls)return '<div class=visor>'+fotoHtml(it)+(it.imagen?'<button type=button class=zoom id=zoom>Ver grande</button>':'')+'</div>';
+  return htmlGiro(it,giro);
+}
+function enlazarGiro(){
+  const g=$('#giro');if(!g)return;
+  const imgs=[].slice.call(g.querySelectorAll('img'));
+  if(imgs.length<2)return;
+  let ang=+g.dataset.ang||0,x0=0,a0=0,activo=false;
+  function cuadro(a){
+    const paso=360/imgs.length;
+    let n=Math.round(a/paso);
+    n=((n%imgs.length)+imgs.length)%imgs.length;
+    return n;
+  }
+  function pinta(){
+    let a=ang%360;if(a<0)a+=360;
+    const i=cuadro(a);
+    imgs.forEach(function(im,k){im.style.opacity=k===i?'1':'0'});
+    g.dataset.vista=imgs[i].dataset.full||imgs[i].src;
+    g.setAttribute('aria-valuenow',String(Math.round(a)));
+    const marca=$('#aro');if(marca)marca.style.left=(a/360*100)+'%';
+  }
+  function quieta(){
+    let a=ang%360;if(a<0)a+=360;
+    ang=cuadro(a)*(360/imgs.length);
+    pinta();
+  }
+  function abajo(ev){
+    if(ev.button!=null&&ev.button!==0)return;
+    activo=true;g.classList.add('moviendo');
+    x0=ev.clientX;a0=ang;
+    try{g.setPointerCapture(ev.pointerId)}catch(e){}
+  }
+  function mueve(ev){
+    if(!activo)return;
+    ang=a0+(x0-ev.clientX)/Math.max(1,g.clientWidth)*360;
+    pinta();
+  }
+  function suelta(){if(!activo)return;activo=false;g.classList.remove('moviendo');quieta()}
+  g.addEventListener('pointerdown',abajo);
+  g.addEventListener('pointermove',mueve);
+  g.addEventListener('pointerup',suelta);
+  g.addEventListener('pointercancel',suelta);
+  g.addEventListener('keydown',function(ev){
+    if(ev.key==='ArrowLeft'||ev.key==='ArrowRight'){
+      ang=cuadro(ang)*(360/imgs.length)+(ev.key==='ArrowLeft'?-1:1)*(360/imgs.length);
+      quieta();
+      ev.preventDefault();
+    }
+  });
+  pinta();
+}
+function htmlFicha(it){
+  const cols=coloresDe(it),tals=tallasDe(it);
+  const nota=it.tipo==='Parche'?'<p class=aviso>Este parche no se entrega suelto: se borda directo en la prenda.</p>':'';
+  const colores=cols.length?'<div class=grupo><b>Color</b><div class=ops id=opsColor>'+cols.map(c=>opColor(c)).join('')+'</div></div>':'';
+  const genero=it.tipo==='Parche'?'':'<div class=grupo><b>Para</b><div class=ops id=opsGen>'+['Hombre','Mujer','Unisex'].map(g=>'<button type=button class="op'+(eleccion.genero===g?' on':'')+'" data-g="'+g+'">'+g+'</button>').join('')+'</div></div>';
+  return (MODO==='prenda'?'':'<button type=button class=x id=cerrar aria-label=Cerrar>×</button>')+'<div class=hoja>'+htmlVisor(it)+'<div class=detalle><small style="color:var(--mut);letter-spacing:.06em;text-transform:uppercase">'+esc(it.tipo||'Referencia')+(it.disponibilidad?' · '+esc(it.disponibilidad):'')+'</small><h2>'+esc(it.nombre)+'</h2><b class=precio style="font-size:22px">'+(it.precio?money(it.precio):'Precio al confirmar')+'</b><p class=desc>'+esc(it.descripcion||'Uniforme HOBA Impact.')+'</p>'+nota+colores+'<div class=grupo><b>Talla</b><div class=ops id=opsTalla>'+tals.map(t=>'<button type=button class="op'+(eleccion.talla===t?' on':'')+'" data-t="'+esc(t)+'">'+esc(t)+'</button>').join('')+'</div></div>'+genero+'<div class=grupo><b>Cantidad</b><div class=cant><button type=button id=menos aria-label=Restar>−</button><input id=cant inputmode=numeric value="'+eleccion.cantidad+'"><button type=button id=mas aria-label=Sumar>+</button></div></div><p class=ya id=ya></p><button type=button class=agregar id=agregar>Agregar al pedido</button></div></div>';
+}
+function opColor(c){
+  const p=pigmento(c);
+  const dot=p?'<i class=punto style="background:'+p+'"></i>':'';
+  return '<button type=button class="op'+(eleccion.color===c?' on':'')+'" data-color="'+esc(c)+'">'+dot+esc(rotuloColor(c))+'</button>';
+}
+function marca(sel,attr,val){
+  document.querySelectorAll(sel).forEach(b=>b.classList.toggle('on',b.getAttribute(attr)===val));
+}
+function textoYa(){
+  const ya=carro.find(x=>clave(x)===clave({id:ficha.id,...eleccion}));
+  $('#ya').textContent=ya?('Ya llevas '+ya.cantidad+' de esta combinación. Al agregar, se actualiza.'):'';
+  $('#agregar').textContent=ya?'Actualizar en el pedido':'Agregar al pedido';
+}
+function similares(it){
+  const mismo=ITEMS.filter(x=>x.id!==it.id&&x.tipo&&x.tipo===it.tipo);
+  const resto=ITEMS.filter(x=>x.id!==it.id&&x.tipo!==it.tipo);
+  return mismo.concat(resto).slice(0,8);
+}
+function htmlSimilares(it){
+  const lista=similares(it);
+  if(!lista.length)return '';
+  return '<section class=similares><p class=ojo>SIMILARES</p><h2>También te puede servir</h2><div class=carrusel>'+lista.map(x=>'<a href="/HOBA-IMPACT/c/p/'+x.id+'"><div class=foto>'+fotoHtml(x)+'</div><b>'+esc(x.nombre)+'</b><span class=precio>'+(x.precio?money(x.precio):'Precio al confirmar')+'</span></a>').join('')+'</div></section>';
+}
+function pintarHoja(it){
+  ficha=it;pedido=false;
+  const cols=coloresDe(it),tals=tallasDe(it);
+  eleccion={color:cols[0]||'',talla:tals[0]||'Única',genero:it.tipo==='Parche'?'Unisex':paraDe(it),cantidad:1};
+  const ya=carro.find(x=>clave(x)===clave({id:it.id,...eleccion}));
+  if(ya)eleccion.cantidad=ya.cantidad;
+  $('#grid').hidden=true;
+  $('#hoja').hidden=false;
+  $('#tituloPag').textContent=it.nombre||'Prenda';
+  $('#bajadaPag').textContent='Color, talla, cantidad y prendas parecidas.';
+  $('#hoja').innerHTML='<p class=atras><a href="/HOBA-IMPACT/c">Volver al catálogo</a></p><div class="panel ficha">'+htmlFicha(it)+'</div>'+htmlSimilares(it);
+  enlazarFicha();
+}
+function enlazarFicha(){
+  const cerrarBtn=$('#cerrar');if(cerrarBtn)cerrarBtn.onclick=cerrar;
+  const z=$('#zoom');if(z)z.onclick=()=>{const g=$('#giro');$('#luzImg').src=(g&&g.dataset.vista)||ficha.imagen;$('#luzImg').alt=ficha.nombre;$('#luz').hidden=false};
+  document.querySelectorAll('[data-color]').forEach(b=>b.onclick=()=>{eleccion.color=b.dataset.color;marca('#opsColor [data-color]','data-color',eleccion.color);textoYa()});
+  document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{eleccion.talla=b.dataset.t;marca('#opsTalla [data-t]','data-t',eleccion.talla);textoYa()});
+  document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{eleccion.genero=b.dataset.g;marca('#opsGen [data-g]','data-g',eleccion.genero);textoYa()});
+  $('#menos').onclick=()=>{eleccion.cantidad=Math.max(1,(+eleccion.cantidad||1)-1);$('#cant').value=eleccion.cantidad};
+  $('#mas').onclick=()=>{eleccion.cantidad=Math.min(5000,(+eleccion.cantidad||1)+1);$('#cant').value=eleccion.cantidad};
+  $('#cant').oninput=()=>{eleccion.cantidad=Math.max(1,Math.min(5000,Math.round(+$('#cant').value||1)));};
+  $('#agregar').onclick=agregar;
+  textoYa();
+  enlazarGiro();
+  enlazarPano();
+  cargarVuelta(ficha);
+}
+function enlazarPano(){
+  const p=$('#pano');if(!p)return;
+  const caja=$('#panoGiro');
+  let ang=0,x0=0,a0=0,activo=false;
+  function pinta(){
+    let a=ang%360;if(a<0)a+=360;
+    const c=Math.cos(a*Math.PI/180);
+    const cara=c>=0;
+    const frente=caja.querySelector('.pano-frente');
+    const reverso=caja.querySelector('.pano-reverso');
+    if(frente)frente.style.opacity=cara?'1':'0';
+    if(reverso)reverso.style.opacity=cara?'0':'1';
+    caja.style.transform='scaleX('+Math.max(0.06,Math.abs(c))+')';
+    p.setAttribute('aria-valuenow',String(Math.round(a)));
+    const marca=$('#aro');if(marca)marca.style.left=(a/360*100)+'%';
+  }
+  function abajo(ev){
+    if(ev.button!=null&&ev.button!==0)return;
+    activo=true;p.classList.add('moviendo');
+    x0=ev.clientX;a0=ang;
+    try{p.setPointerCapture(ev.pointerId)}catch(e){}
+  }
+  function mueve(ev){
+    if(!activo)return;
+    ang=a0+(x0-ev.clientX)/Math.max(1,p.clientWidth)*360;
+    pinta();
+  }
+  function quieta(){
+    let a=ang%360;if(a<0)a+=360;
+    ang=a<90||a>=270?0:180;
+    pinta();
+  }
+  function suelta(){if(!activo)return;activo=false;p.classList.remove('moviendo');quieta()}
+  p.addEventListener('pointerdown',abajo);
+  p.addEventListener('pointermove',mueve);
+  p.addEventListener('pointerup',suelta);
+  p.addEventListener('pointercancel',suelta);
+  p.addEventListener('keydown',function(ev){
+    if(ev.key==='ArrowLeft'||ev.key==='ArrowRight'){
+      ang=ang%360<90||ang%360>=270?180:0;
+      quieta();
+      ev.preventDefault();
+    }
+  });
+  pinta();
+}
+function cargarVuelta(it){
+  if(!it||esToalla(it))return;
+  const ya=$('#giro');
+  if(ya&&ya.dataset.listo==='1')return;
+  const id=idGiro(it.imagen);
+  if(!id)return;
+  const urls=[];
+  let n=1;
+  (function paso(){
+    if(n>8){if(urls.length>1)poner(urls);return}
+    const u='/HOBA-IMPACT/inicio/img/web-g-'+id+'-'+(n<10?'0':'')+n+'.jpg?v=1';
+    const im=new Image();
+    im.onload=function(){urls.push(u);n++;paso()};
+    im.onerror=function(){if(urls.length>1)poner(urls)};
+    im.src=u;
+  })();
+  function poner(lista){
+    if(!ficha||ficha.id!==it.id)return;
+    const visor=document.querySelector('.visor');
+    if(!visor)return;
+    const caja=document.createElement('div');
+    caja.innerHTML=htmlGiro(it,{inicio:0,urls:lista,directo:1});
+    visor.replaceWith(caja.firstChild);
+    enlazarGiro();
+    const z=$('#zoom');
+    if(z)z.onclick=function(){const g=$('#giro');$('#luzImg').src=(g&&g.dataset.vista)||ficha.imagen;$('#luzImg').alt=ficha.nombre;$('#luz').hidden=false};
+  }
+}
+function agregar(){
+  const cant=Math.max(1,Math.min(5000,Math.round(+$('#cant').value||eleccion.cantidad||1)));
+  eleccion.cantidad=cant;
+  const linea={id:ficha.id,nombre:ficha.nombre,imagen:ficha.imagen||'',talla:eleccion.talla,color:eleccion.color,genero:eleccion.genero,cantidad:cant,precio:+ficha.precio||0};
+  const i=carro.findIndex(x=>clave(x)===clave(linea));
+  if(i>=0)carro[i]=linea;else carro.push(linea);
+  guardar();pintaBarra();
+  anotarVisita({pagina:'prenda', accion:'agregar', producto:ficha.id, nombre:ficha.nombre||''});
+  const nombre=ficha.nombre;
+  if(MODO==='prenda'){textoYa();mostrarToast(nombre+' quedó en el pedido');return}
+  cerrar();
+  mostrarToast(nombre+' quedó en el pedido');
+}
+function mostrarToast(t){
+  $('#toastTxt').textContent=t;$('#toast').hidden=false;
+  clearTimeout(toastT);toastT=setTimeout(()=>{$('#toast').hidden=true},3200);
+}
+function cerrar(){
+  $('#velo').hidden=true;$('#luz').hidden=true;ficha=null;pedido=false;document.body.style.overflow='';
+}
+function abrirPedido(){
+  if(!carro.length)return;
+  ficha=null;pedido=true;
+  $('#panel').className='panel pedido';
+  $('#panel').innerHTML=htmlPedido();
+  $('#velo').hidden=false;
+  document.body.style.overflow='hidden';
+  enlazarPedido();
+}
+function htmlPedido(){
+  return '<div class=pad><button type=button class=x id=cerrar aria-label=Cerrar>×</button><h2>Tu pedido</h2><div id=lineas></div><div class=total><span>Referencia</span><b id=total></b></div><p class=nota>El valor es de referencia. Tu asesor confirma el abono y la entrega. Cada prenda queda como una cotización.</p><div id=error class=err hidden></div><form class=form id=form><div class=cols><label>Nombre<input id=nombre autocomplete=name required></label><label>WhatsApp<input id=telefono inputmode=tel autocomplete=tel placeholder="300 000 0000" required></label></div><div class=cols><label>Ciudad<input id=ciudad autocomplete=address-level2></label><label>Dirección<input id=direccion autocomplete=street-address></label></div><label>Nota<textarea id=nota rows=2 placeholder="Bordado, logo u otro detalle"></textarea></label><button class=agregar type=submit id=enviar>Enviar pedido</button></form></div>';
+}
+function pintaLineas(){
+  $('#lineas').innerHTML=carro.map((x,i)=>{
+    const it=itemDe(x.id)||x;
+    const img=x.imagen?'<img src="'+esc(x.imagen)+'" alt="">':'<div class=letra>'+esc((x.nombre||'?')[0])+'</div>';
+    return '<div class=linea>'+img+'<div><b>'+esc(x.nombre)+'</b><p>'+[x.talla,x.color,x.genero].filter(Boolean).map(esc).join(' · ')+'</p><div class=cant><button type=button data-dm="'+i+'">−</button><span>'+x.cantidad+'</span><button type=button data-dp="'+i+'">+</button></div></div><div><b>'+(x.precio?money(x.precio*x.cantidad):'')+'</b><br><button type=button class=menos data-dq="'+i+'">Quitar</button></div></div>';
+  }).join('')||'<p class=nota>El pedido quedó vacío.</p>';
+  $('#total').textContent=money(total());
+  $('#lineas').querySelectorAll('[data-dm]').forEach(b=>b.onclick=()=>cambiar(+b.dataset.dm,-1));
+  $('#lineas').querySelectorAll('[data-dp]').forEach(b=>b.onclick=()=>cambiar(+b.dataset.dp,1));
+  $('#lineas').querySelectorAll('[data-dq]').forEach(b=>b.onclick=()=>{carro.splice(+b.dataset.dq,1);guardar();pintaBarra();pintaLineas()});
+}
+function cambiar(i,d){
+  const x=carro[i];if(!x)return;
+  x.cantidad=Math.max(1,Math.min(5000,x.cantidad+d));
+  guardar();pintaBarra();pintaLineas();
+}
+function enlazarPedido(){
+  $('#cerrar').onclick=cerrar;
+  pintaLineas();
+  let mem={};try{mem=JSON.parse(sessionStorage.getItem('hoba-contacto')||'{}')}catch(e){}
+  ['nombre','telefono','ciudad','direccion','nota'].forEach(k=>{if(mem[k])$('#'+k).value=mem[k]});
+  $('#form').onsubmit=enviar;
+}
+async function enviar(ev){
+  ev.preventDefault();
+  const err=$('#error');err.hidden=true;
+  if(!carro.length){err.hidden=false;err.textContent='Agrega al menos una prenda.';return}
+  const body={nombre:$('#nombre').value.trim(),telefono:$('#telefono').value.trim(),ciudad:$('#ciudad').value.trim(),direccion:$('#direccion').value.trim(),nota:$('#nota').value.trim(),lineas:carro.map(x=>({id:x.id,talla:x.talla,color:x.color,genero:x.genero,cantidad:x.cantidad}))};
+  sessionStorage.setItem('hoba-contacto',JSON.stringify({nombre:body.nombre,telefono:body.telefono,ciudad:body.ciudad,direccion:body.direccion,nota:body.nota}));
+  $('#enviar').disabled=true;
+  try{
+    const lineas=carro.map(x=>[x.cantidad+' x '+x.nombre,x.talla,x.color,x.genero].filter(Boolean).join(' · ')).join('\n');
+    const texto=['Hola, quiero hacer un pedido en HOBA Impact.','Nombre: '+body.nombre,'WhatsApp: '+body.telefono,'Ciudad: '+body.ciudad,'Dirección: '+body.direccion,'Nota: '+body.nota,lineas].filter(Boolean).join('\n');
+    window.open('https://wa.me/573155813545?text='+encodeURIComponent(texto),'_blank','noopener');
+    carro=[];guardar();pintaBarra();
+    $('#panel').innerHTML='<div class=pad><div class=okbox><h2>Pedido listo</h2><p>Se abrió WhatsApp con el pedido para el asesor. Si no se abrió, escríbele al mismo número.</p><button type=button class=agregar id=otro>Seguir mirando</button></div></div>';
+    $('#otro').onclick=cerrar;
+  }catch(e){err.hidden=false;err.textContent='No se pudo enviar. Revisa la conexión.';$('#enviar').disabled=false}
+}
+document.body.addEventListener('click',ev=>{
+  const card=ev.target.closest('.card');
+  if(card){if(card.dataset.id)location.href='/HOBA-IMPACT/c/p/'+card.dataset.id+'/';return}
+  if(ev.target.id==='limpiar2')limpiar();
+});
+function limpiar(){
+  F.tipo=F.disp=F.color=F.talla=F.para='';
+  $('#q').value='';$('#orden').value='nombre';
+  ['fTipo','fDisp','fColor','fTalla','fPara'].forEach(id=>$('#'+id).value='');
+  history.replaceState(null,'','/HOBA-IMPACT/c');
+  pintaGrid();
+}
+function sugerir(){
+  const caja=$('#sugerencias');if(!caja)return;
+  const q=plano($('#q').value).trim();
+  if(!q){caja.hidden=true;caja.innerHTML='';return}
+  const partes=q.split(/\s+/).filter(Boolean);
+  const rows=ITEMS.filter(it=>{
+    const bolsa=plano([it.nombre,it.tipo,it.descripcion,it.colores,it.tallas].join(' '));
+    return partes.every(p=>bolsa.includes(p));
+  }).slice(0,8);
+  caja.hidden=false;
+  caja.innerHTML=rows.length?rows.map(it=>'<a href="/HOBA-IMPACT/c/p/'+it.id+'">'+fotoHtml(it)+'<span><b>'+esc(it.nombre)+'</b><small>'+esc(it.tipo||'HOBA')+' · '+(it.precio?money(it.precio):'Precio al confirmar')+'</small></span></a>').join(''):'<p class=nada>No hay un producto con ese nombre.</p>';
+}
+$('#q').oninput=()=>{sugerir();pintaGrid()};
+document.addEventListener('click',ev=>{if(!ev.target.closest('.busca')){const c=$('#sugerencias');if(c)c.hidden=true}});
+$('#q').addEventListener('keydown',ev=>{if(ev.key==='Escape'){$('#sugerencias').hidden=true;$('#q').blur()}});
+$('#q').addEventListener('focus',sugerir);
+['fTipo','fDisp','fColor','fTalla','fPara','orden'].forEach(id=>$('#'+id).onchange=()=>{
+  const el=$('#'+id);
+  if(id==='fTipo'){
+    history.replaceState(null,'','/HOBA-IMPACT/c'+(el&&el.value?('?tipo='+encodeURIComponent(el.value)):''));
+    if(el&&el.value)anotarVisita({pagina:'catalogo', accion:'pestana', pestana:cortoCat()[el.value]||el.value});
+  }
+  leerFiltros();pintaGrid();
+});
+$('#limpiar').onclick=limpiar;
+$('#ver').onclick=abrirPedido;
+$('#toastIr').onclick=()=>{$('#toast').hidden=true;abrirPedido()};
+$('#cerrarLuz').onclick=()=>{$('#luz').hidden=true};
+$('#velo').addEventListener('click',ev=>{if(ev.target.id==='velo')cerrar()});
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){if(!$('#luz').hidden)$('#luz').hidden=true;else cerrar()}});
+function destinoMenu(m){if(m.destino==='catalogo')return '/HOBA-IMPACT/c';if(m.destino==='toalla')return '/HOBA-IMPACT/inicio/toalla';if(m.destino==='bordar')return '/HOBA-IMPACT/inicio/bordar';if(m.destino==='panel')return '/HOBA-IMPACT/panel';if(m.destino==='inicio')return '/HOBA-IMPACT/inicio';return '/HOBA-IMPACT/inicio/'+m.destino}
+function menusDe(lista){const quita={pedir:1,bordar:1,bordado:1};const menus=(lista||[]).filter(m=>m&&m.visible&&!quita[m.destino]);if(!menus.some(m=>m.destino==='toalla')){const item={titulo:'Tu toalla',destino:'toalla',visible:true};const i=menus.findIndex(m=>m.destino==='catalogo');if(i>=0)menus.splice(i+1,0,item);else menus.push(item)}return menus}
+function cortoCat(){return {'Tácticos verde oliva':'Oliva','Táctico verde manzana':'Manzana','Táctico tono 511':'Tono 511','Deportivos':'Deportivos','Esquemas':'Esquemas','Botas':'Botas','Toallas en microfibra personalizadas':'Toallas','Buzos licrados':'Buzos','Productos Milfort':'Milfort'}}
+function elegirTipo(tipo){
+  if(MODO==='prenda'){location.href='/HOBA-IMPACT/c'+(tipo?('?tipo='+encodeURIComponent(tipo)):'');return}
+  const sel=$('#fTipo'); if(sel)sel.value=tipo||'';
+  leerFiltros();pintaGrid();
+  history.replaceState(null,'','/HOBA-IMPACT/c'+(tipo?('?tipo='+encodeURIComponent(tipo)):''));
+  if(tipo)anotarVisita({pagina:'catalogo',accion:'pestana',pestana:cortoCat()[tipo]||tipo});
+}
+function marcarLineas(){
+  const t=$('#catActual');
+  if(t)t.textContent=F.tipo?(cortoCat()[F.tipo]||F.tipo):'Todo el catálogo';
+}
+function pintaGrupos(){
+  const lineas=$('#lineas');
+  const box=$('#fgrupos');
+  if(lineas&&!lineas.dataset.listo){
+    lineas.dataset.listo='1';
+    const nombres=cortoCat();
+    const lista=(CFG&&CFG.categorias&&CFG.categorias.length)?CFG.categorias:Object.keys(nombres);
+    lineas.innerHTML='<button type="button" data-v="">Todas</button>'+lista.map(c=>'<button type="button" data-v="'+esc(c)+'">'+esc(nombres[c]||c)+'</button>').join('');
+    lineas.addEventListener('click',ev=>{
+      const b=ev.target.closest('button'); if(!b)return;
+      const sel=$('#fTipo'); if(!sel)return;
+      const v=b.dataset.v||'';
+      sel.value=sel.value===v?'':v;
+      sel.dispatchEvent(new Event('change'));
+    });
+  }
+  if(box&&!box.dataset.listo){
+    box.dataset.listo='1';
+    const rotulos={nombre:'Nombre',menor:'Precio más bajo',mayor:'Precio más alto'};
+    const vacio={fColor:'Todos los colores',fPara:'Todos'};
+    function vista(id,etiqueta){
+      const sel=$('#'+id); if(!sel)return '';
+      const reales=[...sel.options].filter(o=>o.value);
+      if(id!=='orden'&&reales.length<2)return '';
+      const html=[...sel.options].map(o=>{
+        if(!o.value&&id==='orden')return '';
+        const texto=o.value?(rotulos[o.value]||o.textContent):(vacio[id]||'Todos');
+        return '<option value="'+esc(o.value)+'">'+esc(texto)+'</option>';
+      }).join('');
+      return '<label>'+esc(etiqueta)+'<select data-espejo="'+id+'">'+html+'</select></label>';
+    }
+    box.innerHTML=vista('fColor','Color')+vista('fPara','Para quién')+vista('orden','Ordenar');
+    box.addEventListener('change',ev=>{
+      const s=ev.target.closest('select'); if(!s)return;
+      const real=$('#'+s.dataset.espejo); if(!real)return;
+      real.value=s.value;
+      real.dispatchEvent(new Event('change'));
+    });
+  }
+  marcarGrupos();
+}
+function marcarGrupos(){
+  const tipo=($('#fTipo')&&$('#fTipo').value)||'';
+  document.querySelectorAll('#lineas button').forEach(b=>b.classList.toggle('on',(b.dataset.v||'')===tipo));
+  document.querySelectorAll('#fgrupos select').forEach(s=>{
+    const real=$('#'+s.dataset.espejo);
+    if(real)s.value=real.value;
+  });
+  const lim=$('#limpiar');
+  if(lim)lim.hidden=!(F.color||F.para||($('#q')&&$('#q').value)||($('#orden')&&$('#orden').value!=='nombre'));
+}
+function pintarMenu(){
+  const e=(CFG&&CFG.estilos)||{};
+  const map={tinta:'--ink',rojo:'--red',fondo:'--paper',tarjeta:'--card',texto:'--txt'};
+  Object.entries(map).forEach(([k,v])=>{if(e[k])document.documentElement.style.setProperty(v,e[k])});
+  const nav=$('#snav');
+  if(!nav)return;
+  const menus=menusDe((CFG&&CFG.menus)||[{titulo:'Inicio',destino:'inicio',visible:true},{titulo:'Catálogo',destino:'catalogo',visible:true}]);
+  nav.innerHTML=menus.map(m=>'<a class="'+(m.destino==='catalogo'?'on':'')+'" href="'+esc(destinoMenu(m))+'">'+esc(m.titulo)+'</a>').join('');
+}
+pintarMenu();
+pintaBarra();
+if(MODO==='prenda'){
+  document.body.classList.add('es-prenda');
+  const it=itemDe(PRENDA);
+  if(!it){$('#grid').hidden=true;$('#hoja').hidden=false;$('#hoja').innerHTML='<div class=vacio><p>Esta prenda ya no está en el catálogo.</p><p><a href="/HOBA-IMPACT/c">Volver al catálogo</a></p></div>';}
+  else pintarHoja(it);
+}else{
+  armarFiltros();
+  const _q=new URLSearchParams(location.search);
+  [['tipo','fTipo'],['disp','fDisp'],['color','fColor'],['talla','fTalla'],['para','fPara']].forEach(function(par){
+    const v=_q.get(par[0]); const el=$('#'+par[1]);
+    if(v&&el&&[...el.options].some(o=>o.value===v)) el.value=v;
+  });
+  leerFiltros();
+  pintaGrupos();
+  pintaGrid();
+  if(location.hash.indexOf('#p')===0){const abiertoId=+location.hash.slice(2);if(itemDe(abiertoId))location.replace('/HOBA-IMPACT/c/p/'+abiertoId+'/')}
+}
+(function(){
+  const a=document.createElement('a');
+  a.className='wa-flot';
+  a.target='_blank';
+  a.rel='noopener noreferrer';
+  a.setAttribute('aria-label','Hablar con un asesor por WhatsApp');
+  a.href='https://wa.me/'+WA+'?text='+encodeURIComponent('Hola, quiero hablar con un asesor de HOBA Impact');
+  a.innerHTML='<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="#fff" d="M12.04 2C6.58 2 2.15 6.4 2.15 11.83c0 1.74.46 3.44 1.34 4.94L2 22l5.39-1.41a10 10 0 0 0 4.65 1.18h.01c5.46 0 9.89-4.4 9.89-9.83C21.94 6.4 17.5 2 12.04 2zm5.76 13.86c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.81-.11-.42-.14-.95-.31-1.64-.6-2.88-1.24-4.76-4.14-4.9-4.33-.14-.19-1.16-1.54-1.16-2.94s.73-2.08 1-2.37c.24-.28.64-.41 1.02-.41.12 0 .23 0 .33.01.3.01.44-.05.68.52.24.6.83 2.06.9 2.21.07.15.12.32.02.52-.1.19-.14.32-.28.49-.14.17-.3.38-.42.51-.14.14-.28.29-.12.56.16.28.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.23 1.37.28.14.44.12.6-.07.16-.19.7-.81.88-1.09.19-.28.37-.23.62-.14.26.09 1.62.76 1.9.9.28.14.46.21.53.32.07.12.07.68-.17 1.36z"/></svg><span>Asesor</span>';
+  document.body.appendChild(a);
+  const visita={pagina:MODO==='prenda'?'prenda':'catalogo'};
+  if(MODO==='prenda'){const it=itemDe(PRENDA);if(it){visita.accion='ver';visita.producto=it.id;visita.nombre=it.nombre||''}}
+  anotarVisita(visita);
+})();
+</script>
+</body>
+</html>
