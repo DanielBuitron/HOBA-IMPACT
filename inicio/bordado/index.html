@@ -171,20 +171,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   .banner-txt,.atajos{width:min(460px,calc(100% - 36px));margin-left:18px}
 }
 @media(max-width:800px){
-  .cinta{font-size:11px;letter-spacing:.04em;line-height:1.35;padding:8px 12px}
-  .nav{grid-template-columns:auto minmax(0,1fr);padding:6px 12px}
-  .links{grid-column:1 / -1;justify-content:flex-start}
+  .cinta{font-size:11px;letter-spacing:.02em;line-height:1.35;padding:7px 12px}
+  .nav{grid-template-columns:auto minmax(0,1fr);padding:4px 10px 8px;gap:4px 8px}
+  .links{grid-column:1 / -1;justify-content:flex-start;flex-wrap:wrap;overflow:visible;row-gap:0}
+  .links a{letter-spacing:.03em;font-size:11px;padding:8px 8px}
   .busca{grid-column:1 / -1}
-  .marca,.marca img{width:52px;height:52px}
+  .busca input{height:40px}
+  .marca,.marca img{width:46px;height:46px}
   .cats{gap:10px;padding:12px}
   .cats a,.cats a img{width:86px}
   .cats a img{height:86px;border-radius:18px;padding:4px}
-  .banner{height:auto;min-height:50svh;max-height:none;display:flex;flex-direction:column;justify-content:flex-end}
-  .banner .fondo{object-position:center 28%}
-  .banner:after{background:linear-gradient(#0000 40%,#1c1815c4 100%)}
-  .banner-txt{width:calc(100% - 28px);max-width:none;margin:0 auto 16px;padding:0;border-radius:0;background:transparent}
-  .banner h1{font-size:32px;max-width:12ch;color:#faf6f1;line-height:.88}
-  .banner .lead{display:none}
+  .banner{height:auto;min-height:0;max-height:none;display:flex;flex-direction:column;justify-content:flex-end;padding-top:26svh}
+  .banner .fondo{object-position:center 22%}
+  .banner:after{background:linear-gradient(#0000 28%,#1c1815d0 100%)}
+  .banner-txt{width:calc(100% - 28px);max-width:none;margin:0 auto 18px;padding:0;border-radius:0;background:transparent}
+  .banner h1{font-size:30px;max-width:14ch;color:#faf6f1;line-height:.95}
+  .banner .lead{display:block;font-size:15px;line-height:1.4;margin-top:8px;max-width:36ch}
   .banner .acciones{margin-top:12px}
   .atajos{display:none}
   .confianza{grid-template-columns:1fr 1fr;margin-top:14px}
@@ -193,22 +195,27 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   .confianza span{font-size:12px}
   .mosaico{grid-template-columns:1fr 1fr;gap:10px;padding:14px 12px}
   .mosaico a{border-radius:16px}
-  .mosaico img{height:190px;padding:2px}
-  .mosaico b{letter-spacing:.04em;font-size:11px;margin:0 8px 8px;padding:6px 0}
-  .tienda h2{margin-left:12px;margin-right:12px}
-  .card{flex-basis:74vw}
-  .riel{padding:12px 12px 28px}
+  .mosaico img{height:148px;padding:2px}
+  .mosaico b{letter-spacing:.04em;font-size:12px;margin:0 8px 8px;padding:6px 0}
+  .tienda h2{margin-left:12px;margin-right:12px;font-size:22px}
+  .card{flex:0 0 calc(50% - 8px)}
+  .card h3{font-size:13px}
+  .riel{padding:12px 12px 28px;gap:10px}
   .hero{min-height:360px}
   .hero:before{background:linear-gradient(#000c,#000 78%)}
   .hero-txt{padding:28px 16px}
   .pasos,.banda,.contacto,.dos,.cols,.ejemplos,.guia,.casa{grid-template-columns:1fr}
   .guia{padding-left:12px;padding-right:12px}
-  main{padding:24px 14px 48px}
-  .pie{padding:24px 14px}
+  .ejemplos img{height:200px}
+  main{margin:16px 10px;padding:22px 14px 40px;border-radius:20px}
+  .pie{padding:22px 14px 28px}
+  .wa-flot{right:12px;bottom:calc(12px + env(safe-area-inset-bottom));padding:12px;border-radius:50%}
+  .wa-flot span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 }
 @media(max-width:420px){
-  .acciones a{padding:11px 12px;font-size:12px}
-  .card{flex-basis:78vw}
+  .banner h1{font-size:28px}
+  .acciones{display:grid;grid-template-columns:1fr 1fr}
+  .acciones a{text-align:center;padding:12px 8px;font-size:12px}
 }
 </style>
 </head>

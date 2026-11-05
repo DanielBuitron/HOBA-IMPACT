@@ -210,26 +210,41 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   .logo{width:64px;height:64px}
 }
 @media(max-width:800px){
-  .cinta{font-size:11px;letter-spacing:.04em;line-height:1.35;padding:8px 12px}
-  .cab{grid-template-columns:auto minmax(0,1fr);gap:10px}
+  .cinta{font-size:11px;letter-spacing:.02em;line-height:1.35;padding:7px 12px}
+  .cab{grid-template-columns:auto minmax(0,1fr);gap:8px}
   .busca{grid-column:1 / -1}
+  .busca input{height:40px}
   .bajada{display:none}
-  .logo{width:56px;height:56px}
-  .marca h1{font-size:13px;letter-spacing:.14em}
-  .snav{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}
-  .top{padding-left:12px;padding-right:12px}
-  #cuenta{flex:1 0 100%;padding-top:2px}
+  .logo{width:46px;height:46px}
+  .marca h1{font-size:12px;letter-spacing:.08em}
+  .snav{flex-wrap:wrap;overflow:visible;margin:2px 0 0;padding:0 0 4px;row-gap:0}
+  .snav a{letter-spacing:.03em;font-size:11px;padding:8px 8px}
+  .top{padding-left:10px;padding-right:10px}
+  .filtros{padding:8px 12px 0}
+  .linea-bar{gap:2px 10px}
+  .lineas{flex:1 0 100%;min-width:0;flex-wrap:nowrap;overflow:auto;gap:0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .lineas::-webkit-scrollbar{display:none}
+  .lineas button{flex:none;font-size:15px;padding:8px 0 10px}
+  #cuenta{flex:none;margin:0 0 6px auto;padding:0;white-space:nowrap}
+  .afinar{display:block;width:100%;padding-top:8px}
+  .fgrupos{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;width:100%}
+  .fgrupos label:last-child{grid-column:1 / -1}
+  .fgrupos label,.fgrupos select{width:100%;min-width:0}
   .fwrap{flex-wrap:nowrap;overflow:auto;padding-bottom:4px}
   .fwrap select,#limpiar{flex:none}
-  #cuenta{flex:none;margin-left:8px;white-space:nowrap}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   main,#hoja{padding-left:10px;padding-right:10px}
-  .detalle{padding:14px}
+  .detalle{padding:14px 14px 28px}
   .detalle h2{font-size:24px}
-  .visor{padding:10px}
-  .giro,.pano{height:min(280px,40vh);min-height:200px}
+  .visor{padding:8px}
+  .giro,.pano{height:min(380px,46vh);min-height:280px}
+  .carrusel a{flex-basis:46vw}
+  .barra.vacia{display:none}
   .wa-flot{bottom:calc(96px + env(safe-area-inset-bottom))}
-  .barra{left:10px;right:10px;bottom:8px}
+  body:has(.barra.vacia) .wa-flot{bottom:calc(14px + env(safe-area-inset-bottom))}
+  .barra{left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom))}
+  .wa-flot span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .wa-flot{right:12px;padding:12px;border-radius:50%}
 }
 @media(max-width:420px){
   .cuerpo h2{font-size:13px}
@@ -385,6 +400,8 @@ function pintaBarra(){
   $('#ver').textContent=n?'Ver pedido':'Ver pedido';
   $('#ver').disabled=!n;
   $('#ver').style.opacity=n?1:.55;
+  const bar=document.querySelector('.barra');
+  if(bar) bar.classList.toggle('vacia',!n);
 }
 function itemDe(id){return ITEMS.find(x=>+x.id===+id)}
 function anotarVisita(cuerpo){

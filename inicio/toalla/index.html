@@ -66,11 +66,16 @@ body.marco main{padding:12px}
 body.marco .encabezado h1{color:#1a1614;font-size:28px}
 body.marco .encabezado p{color:#6f675f}
 @media(max-width:860px){
-  .nav{grid-template-columns:auto 1fr;padding:6px 12px}
+  .cinta{font-size:11px;letter-spacing:.02em;line-height:1.35;padding:7px 12px}
+  .nav{grid-template-columns:auto minmax(0,1fr);padding:4px 10px 8px;gap:6px}
+  .links{grid-column:1 / -1;justify-content:flex-start;flex-wrap:wrap;overflow:visible}
+  .links a{letter-spacing:.03em;font-size:11px;padding:8px 8px}
+  .marca,.marca img{width:46px;height:46px}
   .ir-cat{display:none}
   .taller{grid-template-columns:1fr}
   main{padding:14px 12px 28px}
   .encabezado h1{font-size:28px}
+  .controles{padding:14px}
 }
 </style>
 </head>
