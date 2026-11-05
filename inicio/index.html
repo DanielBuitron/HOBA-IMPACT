@@ -235,7 +235,7 @@ const $=s=>document.querySelector(s);
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function money(n){return '$'+Math.round(+n||0).toLocaleString('es-CO')}
 function destino(m){if(m.destino==='catalogo')return '/HOBA-IMPACT/c';if(m.destino==='toalla')return '/HOBA-IMPACT/inicio/toalla';if(m.destino==='bordar')return '/HOBA-IMPACT/inicio/bordar';if(m.destino==='panel')return '/HOBA-IMPACT/panel';if(m.destino==='inicio')return '/HOBA-IMPACT/inicio';return '/HOBA-IMPACT/inicio/'+m.destino}
-function menusDe(){const quita={pedir:1,bordar:1,bordado:1};const menus=(CFG.menus||[]).filter(m=>m.visible&&!quita[m.destino]);if(!menus.some(m=>m.destino==='toalla')){const item={titulo:'Tu toalla',destino:'toalla'};const i=menus.findIndex(m=>m.destino==='catalogo');if(i>=0)menus.splice(i+1,0,item);else menus.push(item)}return menus}
+function menusDe(){const quita={pedir:1,bordar:1,bordado:1,entrega:1};const menus=(CFG.menus||[]).filter(m=>m.visible&&!quita[m.destino]);if(!menus.some(m=>m.destino==='toalla')){const item={titulo:'Tu toalla',destino:'toalla'};const i=menus.findIndex(m=>m.destino==='catalogo');if(i>=0)menus.splice(i+1,0,item);else menus.push(item)}return menus}
 function estilos(){
   const e=CFG.estilos||{};
   const map={tinta:'--ink',rojo:'--red',fondo:'--paper',tarjeta:'--card',texto:'--txt'};
@@ -317,7 +317,6 @@ const CORTO={
   'Productos Milfort':'Milfort'
 };
 const MOSAICO=['Tácticos verde oliva','Táctico verde manzana','Táctico tono 511','Botas','Toallas en microfibra personalizadas','Deportivos'];
-const ATAJOS=['Tácticos verde oliva','Botas','Toallas en microfibra personalizadas','Deportivos','Esquemas'];
 function tituloFuerte(t){
   const s=String(t||'').replace(/\.$/,'');
   const i=s.lastIndexOf(' ');
@@ -333,8 +332,7 @@ function inicio(){
   const p=CFG.paginas.inicio;
   const grupo=porFoto('cat-oliva-010.png');
   const fondo='<img class=fondo src="/HOBA-IMPACT/inicio/img/web-portada.jpg?v=1" alt="'+(grupo?esc(grupo.nombre):'Grupo con uniforme HOBA')+'" fetchpriority="high" decoding="async">';
-  const atajos='<div class=atajos>'+ATAJOS.map(c=>{const it=dePortada(c);return '<a class=atajo href="/HOBA-IMPACT/c?tipo='+encodeURIComponent(c)+'">'+(it?imgDe(it.imagen,CORTO[c]||c,'',0):'')+'<span>'+esc(CORTO[c]||c)+'</span></a>'}).join('')+'</div>';
-  const hero=p.hero?'<section class=banner>'+fondo+'<div class=banner-txt><p class=kicker>'+esc(p.kicker)+'</p><h1>'+tituloFuerte(p.titulo)+'</h1><p class=lead>'+esc(p.lead)+'</p><div class=acciones><a class=rojo href="/HOBA-IMPACT/c">Ver catálogo</a><a class=claro id=waHero href="https://wa.me/'+esc(WA)+'">WhatsApp</a></div></div>'+atajos+'</section>':'<main><p class=ojo>'+esc(p.kicker)+'</p><h2>'+esc(p.titulo)+'</h2><p class=lead>'+esc(p.lead)+'</p></main>';
+  const hero=p.hero?'<section class=banner>'+fondo+'<div class=banner-txt><p class=kicker>'+esc(p.kicker)+'</p><h1>'+tituloFuerte(p.titulo)+'</h1><p class=lead>'+esc(p.lead)+'</p><div class=acciones><a class=rojo href="/HOBA-IMPACT/c">Ver catálogo</a><a class=claro id=waHero href="https://wa.me/'+esc(WA)+'">WhatsApp</a></div></div></section>':'<main><p class=ojo>'+esc(p.kicker)+'</p><h2>'+esc(p.titulo)+'</h2><p class=lead>'+esc(p.lead)+'</p></main>';
   const mosaico=p.categorias?'<nav class=mosaico>'+MOSAICO.map(c=>{const it=dePortada(c);return '<a href="/HOBA-IMPACT/c?tipo='+encodeURIComponent(c)+'">'+(it?imgDe(it.imagen,CORTO[c]||c,'loading="lazy"',0):'')+'<b>'+esc(CORTO[c]||c)+'</b></a>'}).join('')+'</nav>':'';
   const oficiales=CFG.categorias||[];
   const bloques=oficiales.map(c=>{

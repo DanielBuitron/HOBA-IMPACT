@@ -747,7 +747,7 @@ $('#cerrarLuz').onclick=()=>{$('#luz').hidden=true};
 $('#velo').addEventListener('click',ev=>{if(ev.target.id==='velo')cerrar()});
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){if(!$('#luz').hidden)$('#luz').hidden=true;else cerrar()}});
 function destinoMenu(m){if(m.destino==='catalogo')return '/HOBA-IMPACT/c';if(m.destino==='toalla')return '/HOBA-IMPACT/inicio/toalla';if(m.destino==='bordar')return '/HOBA-IMPACT/inicio/bordar';if(m.destino==='panel')return '/HOBA-IMPACT/panel';if(m.destino==='inicio')return '/HOBA-IMPACT/inicio';return '/HOBA-IMPACT/inicio/'+m.destino}
-function menusDe(lista){const quita={pedir:1,bordar:1,bordado:1};const menus=(lista||[]).filter(m=>m&&m.visible&&!quita[m.destino]);if(!menus.some(m=>m.destino==='toalla')){const item={titulo:'Tu toalla',destino:'toalla',visible:true};const i=menus.findIndex(m=>m.destino==='catalogo');if(i>=0)menus.splice(i+1,0,item);else menus.push(item)}return menus}
+function menusDe(lista){const quita={pedir:1,bordar:1,bordado:1,entrega:1};const menus=(lista||[]).filter(m=>m&&m.visible&&!quita[m.destino]);if(!menus.some(m=>m.destino==='toalla')){const item={titulo:'Tu toalla',destino:'toalla',visible:true};const i=menus.findIndex(m=>m.destino==='catalogo');if(i>=0)menus.splice(i+1,0,item);else menus.push(item)}return menus}
 function cortoCat(){return {'Tácticos verde oliva':'Oliva','Táctico verde manzana':'Manzana','Táctico tono 511':'Tono 511','Deportivos':'Deportivos','Esquemas':'Esquemas','Botas':'Botas','Toallas en microfibra personalizadas':'Toallas','Buzos licrados':'Buzos','Productos Milfort':'Milfort'}}
 function elegirTipo(tipo){
   if(MODO==='prenda'){location.href='/HOBA-IMPACT/c'+(tipo?('?tipo='+encodeURIComponent(tipo)):'');return}
