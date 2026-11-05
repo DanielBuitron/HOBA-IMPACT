@@ -1,3 +1,321 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HOBA Impact</title>
-<link rel="icon" href="/HOBA-IMPACT/favicon.ico"><style>body{margin:0;font-family:system-ui,sans-serif;background:#161311;color:#f4efe6;display:grid;min-height:100vh;place-items:center}main{max-width:460px;padding:28px}a{color:#fff}</style></head>
-<body><main><h1>La administración sigue en el computador</h1><p>Esta dirección es la página pública: el catálogo, las líneas y el contacto por WhatsApp. El ingreso del equipo, la bodega y los pedidos se abren en la aplicación HOBA, con el computador encendido.</p><p><a href="/HOBA-IMPACT/c/">Ver el catálogo</a></p></main></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1c1815">
+<title>Iniciar sesión · HOBA Impact</title>
+<link rel="icon" href="/HOBA-IMPACT/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="/HOBA-IMPACT/icono-pestana.png" sizes="32x32">
+<style>
+:root{--ink:#1c1815;--red:#C8102E;--paper:#f4efe6;--card:#faf6f1;--txt:#161311;--mut:#6b6258;--ln:#e4d9cb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--txt);font-family:Bahnschrift,"Segoe UI",system-ui,sans-serif;min-height:100vh}
+a{color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.nav{background:linear-gradient(180deg,#2a221c,#1c1815);color:#f4efe6;border-bottom:3px solid var(--red);display:flex;align-items:center;gap:12px;padding:8px 16px;position:sticky;top:0;z-index:5}
+.marca{display:flex;align-items:center;text-decoration:none;color:#f4efe6}
+.marca img{height:52px;width:auto;mix-blend-mode:lighten}
+.links{display:flex;gap:2px;margin-left:auto;overflow:auto}
+.links a{color:#d7d1c6;text-decoration:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 9px;white-space:nowrap}
+.links a.on{color:#fff;box-shadow:inset 0 -2px 0 var(--red)}
+.login{min-height:calc(100vh - 70px);display:grid;grid-template-columns:1.1fr .9fr}
+.lado{background:#161311;color:#f4efe6;padding:48px 40px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.lado h1{margin:8px 0;font-size:clamp(28px,4vw,42px);line-height:1.05}
+.lado p,.lado li{color:#e6dccf;line-height:1.45}
+.form{display:grid;align-content:center;gap:12px;padding:32px;max-width:440px}
+label{display:grid;gap:4px;font-size:13px;color:var(--mut)}
+input,select{font-size:16px;padding:11px;border:1px solid var(--ln);border-radius:8px;background:#fff;color:var(--txt)}
+.entrar{background:var(--red);color:#fff;border:0;border-radius:8px;padding:12px;font-weight:750}
+.err{color:#9f1239;font-size:13px;min-height:1.2em}
+main{max-width:1180px;margin:0 auto;padding:18px 16px 56px}
+.ph{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.ph p{color:var(--mut);margin:4px 0 0}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.acts a,.acts button,.mini{border:1px solid var(--ln);background:#fff;border-radius:8px;padding:8px 12px;text-decoration:none;font-weight:650;color:var(--txt)}
+.tabs{display:flex;gap:6px;overflow:auto;margin:16px 0 8px;padding-bottom:4px}
+.tabs button{border:1px solid var(--ln);background:#fff;border-radius:999px;padding:8px 14px;white-space:nowrap;color:var(--txt)}
+.tabs button.on{background:var(--ink);color:#f4efe6;border-color:var(--ink)}
+h2.sec{margin:8px 0;font-size:18px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.kp{background:var(--card);border:1px solid var(--ln);border-top:3px solid var(--red);border-radius:10px;padding:12px}
+.kp small{color:var(--mut);display:block}
+.kp b{font-size:24px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.caja{background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:12px}
+.caja h3{margin:0 0 10px;font-size:15px}
+.bf{display:grid;grid-template-columns:92px 1fr 48px;gap:8px;align-items:center;margin:6px 0;font-size:13px}
+.trk{height:8px;background:#efe7dc;border-radius:99px;overflow:hidden}
+.trk i{display:block;height:100%;background:var(--red)}
+.nota{background:#fff7ed;color:#9a3412;border-radius:8px;padding:10px 12px;margin:0 0 14px;line-height:1.4}
+.aviso{background:#ecfdf3;color:#166534;border-radius:8px;padding:10px 12px;margin:0 0 14px}
+.tabla{overflow:auto;border:1px solid var(--ln);border-radius:10px;background:#fff}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--ln);font-size:14px;vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);background:#faf6f1}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.bajo{color:#9f1239;font-weight:700}
+.flujo{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.paso{background:#fff;border:1px solid var(--ln);border-radius:10px;padding:10px}
+.paso small{color:var(--mut);display:block}
+.paso b{font-size:22px}
+.fila{display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin:8px 0 12px}
+.ok{color:#166534}
+@media(max-width:900px){.login{grid-template-columns:1fr}.kpis,.dos,.flujo{grid-template-columns:1fr 1fr}.lado{padding:28px 16px}}
+@media(max-width:640px){.kpis,.dos,.flujo{grid-template-columns:1fr}.marca img{height:42px}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="marca" href="/HOBA-IMPACT/inicio"><img src="/HOBA-IMPACT/inicio/img/web-logo.png" alt="HOBA Impact"></a>
+  <nav class="links" id="nav"></nav>
+</header>
+<div id="vista"></div>
+<script>
+const CFG={"estilos": {"tinta": "#000000", "rojo": "#C8102E", "fondo": "#f3efe6", "tarjeta": "#ffffff", "texto": "#161616"}, "categorias": ["Tácticos verde oliva", "Táctico verde manzana", "Táctico tono 511", "Deportivos", "Esquemas", "Botas", "Toallas en microfibra personalizadas", "Buzos licrados", "Productos Milfort"], "menus": [{"id": "inicio", "titulo": "Inicio", "destino": "inicio", "visible": true}, {"id": "catalogo", "titulo": "Catálogo", "destino": "catalogo", "visible": true}, {"id": "toalla", "titulo": "Tu toalla", "destino": "toalla", "visible": true}, {"id": "bordado", "titulo": "Bordado", "destino": "bordado", "visible": true}, {"id": "entrega", "titulo": "Entrega", "destino": "entrega", "visible": true}, {"id": "contacto", "titulo": "Contacto", "destino": "contacto", "visible": true}, {"id": "panel", "titulo": "Panel", "destino": "panel", "visible": true}], "paginas": {"inicio": {"kicker": "HOBA IMPACTO SAS · TULUÁ", "titulo": "Uniforme táctico para el turno.", "lead": "Camisa, pantalón cargo, chaleco y bordado directo. Eliges en el catálogo o escribes por WhatsApp. El pedido entra al sistema del equipo.", "hero": true, "categorias": true, "tienda": true}, "pedir": {"ojo": "CÓMO PEDIR", "titulo": "De la ficha al uniforme", "pasos": [{"t": "Elige", "p": "Abres la prenda, talla, color y cantidad. O lo escribes por WhatsApp."}, {"t": "Cotización", "p": "Queda en el sistema. El asesor confirma bordado, ciudad y entrega."}, {"t": "Abono 50%", "p": "Con eso se aparta. El comprobante se compara con el banco."}, {"t": "Entrega", "p": "Corte, taller, revisión y empaque. En Tuluá lo llevamos nosotros."}], "faq": [{"q": "¿El precio de la ficha es el definitivo?", "a": "Es de referencia. La cotización confirma cantidad, bordado y el abono del 50%."}, {"q": "¿Cuándo llega?", "a": "Con tela en bodega, al día siguiente. Sobre pedido, entre 15 y 20 días."}, {"q": "¿Qué cubre la garantía?", "a": "Un daño de producción, durante dos meses desde la salida."}]}, "bordado": {"ojo": "BORDADO", "titulo": "Bordado personalizado, directo en la prenda.", "texto": "El par de bordados es el ejemplo: el nombre con el rango, o el juego de la institución. El tuyo se hace con tu nombre, tu grado, tu fecha o tu unidad.", "nota": "Si es estándar y hay tela, la entrega queda para el día siguiente.", "nota2": "Si se fabrica sobre pedido, queda entre 15 y 20 días. El 50% aparta la venta a cualquier hora."}, "entrega": {"ojo": "ENTREGA", "titulo": "Tuluá y el resto del país", "c1t": "En Tuluá", "c1p": "La entrega la hace el equipo. Deja la dirección al pedir.", "c2t": "Fuera de Tuluá", "c2p": "Sale con Interrapidísimo cuando el pago está completo."}, "contacto": {"ojo": "CONTACTO", "titulo": "Deja el uniforme.", "texto": "La consulta queda como cotización. El asesor la ve en el sistema."}}, "libres": []};
+const $=s=>document.querySelector(s);
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function money(n){return '$'+Math.round(+n||0).toLocaleString('es-CO')}
+function destino(m){if(m.destino==='catalogo')return '/HOBA-IMPACT/c';if(m.destino==='toalla')return '/HOBA-IMPACT/inicio/toalla';if(m.destino==='bordar')return '/HOBA-IMPACT/inicio/bordar';if(m.destino==='panel')return '/HOBA-IMPACT/panel';if(m.destino==='inicio')return '/HOBA-IMPACT/inicio';return '/HOBA-IMPACT/inicio/'+m.destino}
+function menusDe(){const quita={pedir:1,bordar:1,bordado:1};const menus=(CFG.menus||[]).filter(m=>m.visible&&!quita[m.destino]);if(!menus.some(m=>m.destino==='toalla')){const item={titulo:'Tu toalla',destino:'toalla'};const i=menus.findIndex(m=>m.destino==='catalogo');if(i>=0)menus.splice(i+1,0,item);else menus.push(item)}return menus}
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim()}
+$('#nav').innerHTML=menusDe().map(m=>'<a class="'+(m.destino==='panel'?'on':'')+'" href="'+esc(destino(m))+'">'+esc(m.destino==='panel'?'Iniciar sesión':m.titulo)+'</a>').join('');
+let DATOS=null, SEC='resumen', WOMPI=null;
+async function jget(url){
+  const r=await fetch(url,{credentials:'same-origin',cache:'no-store'});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok) throw Object.assign(new Error(j.error||'No se pudo leer'),{status:r.status});
+  return j;
+}
+function login(){
+  $('#vista').innerHTML='<div class=login><section class=lado><img src="/HOBA-IMPACT/inicio/img/web-logo.png" alt="HOBA Impact" style="width:min(240px,70vw);height:auto;display:block"><h1>Administración de la tienda</h1><p>El mismo ingreso de la aplicación. Desde aquí se mira la bodega, cómo va la página y los pedidos que llegan del catálogo.</p><ul><li>Stock de producto terminado y materia prima</li><li>Pedidos, consultas y reportes de la tienda</li><li>Qué pestañas y prendas miran, piden y todavía no piden</li><li>Wompi queda listo, el cobro sigue apagado</li></ul></section><form class=form id=form><div><h2>Iniciar sesión</h2><p style="color:var(--mut);margin:4px 0 0">Ingresa con tu usuario corporativo</p></div><label>Usuario<input id=usuario autocomplete=username required></label><label>Clave<input id=clave type=password autocomplete=current-password required></label><p class=err id=error></p><button class=entrar type=submit>Ingresar</button></form></div>';
+  $('#form').onsubmit=async ev=>{
+    ev.preventDefault();
+    $('#error').textContent='';
+    try{
+      const r=await fetch('/api/login',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({usuario:$('#usuario').value.trim(),clave:$('#clave').value})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok) throw new Error(j.error||'Usuario o clave incorrectos');
+      tablero();
+    }catch(e){$('#error').textContent=e.message||'No se pudo ingresar'}
+  };
+}
+function libre(i){return (+i.cantidad||0)-(+i.reservado||0)}
+function esTerminado(i){return /terminado/i.test(i.tipo||'')}
+function esMateria(i){return /materia|tela/i.test(i.tipo||'')}
+function minimoDe(i){return +i.minimo_uniformes||+i.minimo||0}
+function verLibre(i){const d=libre(i);return esMateria(i)?money(d):String(Math.round(d))}
+function alcance(it){
+  const stock=Math.max(0,libre(it));
+  const filas=[];
+  (DATOS.recetas||[]).forEach(r=>{(r.insumos||[]).forEach(ins=>{
+    if(norm(ins.material)!==norm(it.item))return;
+    const v=+ins.valor||0;
+    if(v>0)filas.push({prenda:r.prenda||'Prenda',alcanza:Math.floor(stock/v)});
+  })});
+  filas.sort((a,b)=>a.alcanza-b.alcanza);
+  return filas;
+}
+function valorDe(c){const p=+c.precio;const n=+c.cantidad||0;return p>0?p*n:0}
+function nombrePag(k){
+  const n={inicio:'Inicio',catalogo:'Catálogo',prenda:'Ficha',pedir:'Cómo pedir',bordado:'Bordado',entrega:'Entrega',contacto:'Contacto',panel:'Panel'};
+  return n[k]||k;
+}
+function barras(filas,texto){
+  const max=Math.max.apply(null,filas.map(f=>f.v).concat([1]));
+  return filas.map(f=>'<div class=bf><span>'+esc(f.n)+'</span><div class=trk><i style="width:'+Math.max(4,f.v/max*100)+'%"></i></div><b>'+(texto?texto(f.v):f.v)+'</b></div>').join('')||'<p style="color:var(--mut);margin:0">Todavía no hay movimiento en este periodo.</p>';
+}
+function csv(nombre, filas){
+  const texto=filas.map(f=>f.map(c=>{const s=String(c??'');return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\ufeff'+texto],{type:'text/csv;charset=utf-8'}));
+  a.download=nombre;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function paginaDe(){return (DATOS.cots||[]).filter(c=>c.origen==='Catálogo'||c.origen==='Página web')}
+function ventasDe(){return DATOS.cots||[]}
+function sumarPaginas(){
+  const pags={};
+  (DATOS.vis.dias||[]).forEach(d=>Object.entries(d.paginas||{}).forEach(([k,v])=>{pags[k]=(pags[k]||0)+(+v||0)}));
+  return pags;
+}
+function mapaPedidos(){
+  const map={};
+  ventasDe().forEach(c=>{
+    const k=norm(c.producto);
+    if(!k)return;
+    const cur=map[k]||{nombre:c.producto,pedidos:0,unidades:0,confirmadas:0};
+    cur.pedidos+=1;
+    cur.unidades+=(+c.cantidad||0);
+    if(c.estado==='Aprobada'||c.estado==='Convertida') cur.confirmadas+=(+c.cantidad||0);
+    map[k]=cur;
+  });
+  return map;
+}
+function mapaInteres(){
+  const map={};
+  Object.entries(DATOS.vis.productos||{}).forEach(([id,p])=>{
+    const nombre=p.nombre||('Prenda '+id);
+    const k=norm(nombre);
+    const cur=map[k]||{nombre:nombre,ver:0,agregar:0,id:id};
+    cur.ver+=(+p.ver||0);
+    cur.agregar+=(+p.agregar||0);
+    map[k]=cur;
+  });
+  return map;
+}
+function topDe(lista,n){return lista.sort((a,b)=>b.v-a.v).slice(0,n)}
+function marco(html){
+  const u=DATOS.yo.user||{};
+  const tabs=[['resumen','Resumen'],['bodega','Bodega'],['reportes','Reportes'],['traza','Trazabilidad'],['wompi','Wompi']];
+  return '<main><div class=ph><div><h1>Tienda</h1><p>'+esc(u.nombre||u.usuario||'')+' · '+esc(u.rol||'')+'</p></div><div class=acts><a href="/HOBA-IMPACT/inicio">Ver la página</a><a href="/">Abrir la aplicación</a><button type=button id=salir>Salir</button></div></div><nav class=tabs>'+tabs.map(t=>'<button type=button data-sec="'+t[0]+'" class="'+(SEC===t[0]?'on':'')+'">'+t[1]+'</button>').join('')+'</nav>'+html+'</main>';
+}
+function htmlResumen(){
+  const dias=DATOS.vis.dias||[];
+  const hoy=dias.length?dias[dias.length-1]:{vistas:0,unicas:0};
+  const vistas=dias.reduce((a,d)=>a+(+d.vistas||0),0);
+  const unicas=dias.reduce((a,d)=>a+(+d.unicas||0),0);
+  const pagina=paginaDe();
+  const ventas=ventasDe();
+  const porConf=ventas.filter(c=>c.estado==='Por confirmar'||c.estado==='Pendiente').length;
+  const vendidas=ventas.filter(c=>c.estado==='Aprobada'||c.estado==='Convertida');
+  const valor=vendidas.reduce((a,c)=>a+valorDe(c),0);
+  const inv=DATOS.inv||[];
+  const listos=inv.filter(i=>esTerminado(i)&&libre(i)>0);
+  const unidades=listos.reduce((a,i)=>a+libre(i),0);
+  const bajos=inv.filter(i=>{const m=minimoDe(i);const peor=alcance(i)[0];return esMateria(i)&&m>0&&peor&&peor.alcanza<=m}).length;
+  const pags=sumarPaginas();
+  const top=topDe(Object.entries(pags).map(([k,v])=>({n:nombrePag(k),v:v})),6);
+  return '<h2 class=sec>Cómo va la tienda</h2><p class=nota>Las visitas cubren los últimos 14 días. El valor de referencia solo suma cotizaciones de la página que ya tienen precio. Si el precio está por confirmar, esa cotización cuenta en el número y no en el valor.</p><div class=kpis>'
+    +'<article class=kp><small>Visitas hoy</small><b>'+hoy.vistas+'</b></article>'
+    +'<article class=kp><small>Visitantes hoy</small><b>'+hoy.unicas+'</b></article>'
+    +'<article class=kp><small>Visitas en 14 días</small><b>'+vistas+'</b></article>'
+    +'<article class=kp><small>Visitantes en 14 días</small><b>'+unicas+'</b></article>'
+    +'<article class=kp><small>Pedidos de la página</small><b>'+pagina.length+'</b></article>'
+    +'<article class=kp><small>Cotizaciones de la operación</small><b>'+ventas.length+'</b></article>'
+    +'<article class=kp><small>Por confirmar</small><b>'+porConf+'</b></article>'
+    +'<article class=kp><small>Confirmadas</small><b>'+vendidas.length+'</b></article>'
+    +'<article class=kp><small>Valor con precio</small><b>'+(valor?money(valor):'—')+'</b></article>'
+    +'<article class=kp><small>Unidades listas</small><b>'+unidades+'</b></article>'
+    +'<article class=kp><small>Material bajo el mínimo</small><b>'+bajos+'</b></article>'
+    +'<article class=kp><small>Ítems en bodega</small><b>'+inv.length+'</b></article>'
+    +'</div><div class=dos><section class=caja><h3>Visitas por día</h3>'+barras(dias.map(d=>({n:(d.fecha||'').slice(5),v:+d.vistas||0})))+'</section>'
+    +'<section class=caja><h3>Páginas más vistas</h3>'+barras(top)+'</section></div>';
+}
+function filaTerminado(i){
+  const d=libre(i);
+  const bajo=d<=0;
+  return '<tr><td>'+esc(i.item||i.producto||'Ítem')+'</td><td>'+esc(i.producto||'')+'</td><td>'+esc(i.talla||'')+'</td><td>'+esc(i.color||'')+'</td><td class="num'+(bajo?' bajo':'')+'">'+Math.round(d)+'</td><td class=num>'+Math.round(+i.reservado||0)+'</td><td>'+esc(i.ubicacion||'')+'</td></tr>';
+}
+function filaMateria(i){
+  const peor=alcance(i)[0];
+  const min=minimoDe(i);
+  const bajo=min>0&&peor&&peor.alcanza<=min;
+  const rinde=peor?(peor.alcanza+' '+peor.prenda):'—';
+  return '<tr><td>'+esc(i.item||'Ítem')+'</td><td class="num'+(bajo?' bajo':'')+'">'+verLibre(i)+'</td><td class=num>'+money(+i.reservado||0)+'</td><td>'+esc(rinde)+'</td><td class=num>'+(min||'—')+'</td><td>'+esc(i.ubicacion||'')+'</td></tr>';
+}
+function htmlBodega(){
+  const inv=DATOS.inv||[];
+  const fin=inv.filter(esTerminado).slice().sort((a,b)=>libre(a)-libre(b));
+  const mat=inv.filter(esMateria).slice().sort((a,b)=>libre(a)-libre(b));
+  return '<h2 class=sec>Stock de bodega</h2><p class=nota>La materia prima está guardada en pesos, igual que en la aplicación. En rojo queda el material que ya no alcanza el mínimo de uniformes de su receta. El producto terminado, cuando exista, se muestra en unidades libres.</p>'
+    +'<h3>Materia prima</h3><div class=tabla><table><thead><tr><th>Ítem</th><th class=num>Existencia</th><th class=num>Reservado</th><th>Alcanza</th><th class=num>Mínimo</th><th>Ubicación</th></tr></thead><tbody>'+(mat.map(filaMateria).join('')||'<tr><td colspan=6>No hay materia prima cargada.</td></tr>')+'</tbody></table></div>'
+    +'<h3>Producto terminado</h3><div class=tabla><table><thead><tr><th>Ítem</th><th>Prenda</th><th>Talla</th><th>Color</th><th class=num>Disponible</th><th class=num>Reservado</th><th>Ubicación</th></tr></thead><tbody>'+(fin.map(filaTerminado).join('')||'<tr><td colspan=7>No hay producto terminado con existencia cargada.</td></tr>')+'</tbody></table></div>';
+}
+function htmlReportes(){
+  const tienda=ventasDe().slice().sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')));
+  const estados={};
+  tienda.forEach(c=>{estados[c.estado||'Sin estado']=(estados[c.estado||'Sin estado']||0)+1});
+  const filas=tienda.slice(0,80).map(c=>'<tr><td>'+esc(c.numero||'')+'</td><td>'+esc(c.fecha||'')+'</td><td>'+esc(c.origen||'')+'</td><td>'+esc(c.producto||'')+'</td><td class=num>'+(+c.cantidad||0)+'</td><td>'+esc(c.estado||'')+'</td><td>'+esc(c.ciudad||'')+'</td><td class=num>'+(valorDe(c)?money(valorDe(c)):'—')+'</td></tr>').join('');
+  return '<h2 class=sec>Reportes de la tienda</h2><div class=fila><button type=button class=mini id=bajarPedidos>Descargar pedidos</button><button type=button class=mini id=bajarStock>Descargar bodega</button><button type=button class=mini id=bajarVisitas>Descargar visitas</button></div>'
+    +'<div class=dos><section class=caja><h3>Cotizaciones por estado</h3>'+barras(Object.entries(estados).map(([n,v])=>({n:n||'Sin estado',v:v})))+'</section><section class=caja><h3>Qué incluye el archivo</h3><p style="margin:0;color:var(--mut)">Salen todas las cotizaciones, con su origen: página, catálogo, WhatsApp o presencial. Los pedidos que todavía no llegan por la página aparecen en cero. La bodega sale en pesos para la materia prima y en unidades para el producto terminado. El teléfono del cliente se consulta en la aplicación.</p></section></div>'
+    +'<h3>Últimos movimientos</h3><div class=tabla><table><thead><tr><th>Número</th><th>Fecha</th><th>Origen</th><th>Prenda</th><th class=num>Cant.</th><th>Estado</th><th>Ciudad</th><th class=num>Referencia</th></tr></thead><tbody>'+(filas||'<tr><td colspan=8>Todavía no hay pedidos de la página.</td></tr>')+'</tbody></table></div>';
+}
+function htmlTraza(){
+  const pags=sumarPaginas();
+  const pest=topDe(Object.entries(DATOS.vis.pestanas||{}).map(([n,v])=>({n:n,v:+v||0})),8);
+  const interes=mapaInteres();
+  const pedidos=mapaPedidos();
+  const preguntan=topDe(Object.values(interes).map(p=>({n:p.nombre,v:p.ver+p.agregar,extra:p.ver+' vistas · '+p.agregar+' al pedido'})),8);
+  const venden=topDe(Object.values(pedidos).map(p=>({n:p.nombre,v:p.unidades,extra:p.pedidos+' cotizaciones · '+p.confirmadas+' confirmadas'})),8);
+  const flojos=Object.values(interes).filter(p=>!(pedidos[norm(p.nombre)]||{}).unidades).sort((a,b)=>(b.ver+b.agregar)-(a.ver+a.agregar)).slice(0,8);
+  const sinPedido=(DATOS.cat||[]).filter(it=>it.nombre&&!pedidos[norm(it.nombre)]).length;
+  const menos=Object.values(pedidos).filter(p=>p.unidades>0).sort((a,b)=>a.unidades-b.unidades).slice(0,8);
+  const pasos=[
+    ['Entran al inicio', pags.inicio||0],
+    ['Abren el catálogo', pags.catalogo||0],
+    ['Miran una ficha', pags.prenda||0],
+    ['Agregan al pedido', Object.values(interes).reduce((a,p)=>a+(+p.agregar||0),0)],
+    ['Envían desde la página', paginaDe().length]
+  ];
+  const lista=(arr,vacio)=>arr.map(f=>'<div class=bf><span>'+esc(f.n)+'</span><div class=trk><i style="width:'+Math.max(4,(f.v/(Math.max.apply(null,arr.map(x=>x.v).concat([1]))))*100)+'%"></i></div><b>'+f.v+'</b></div>'+(f.extra?'<p style="margin:0 0 8px;color:var(--mut);font-size:12px">'+esc(f.extra)+'</p>':'')).join('')||'<p style="color:var(--mut);margin:0">'+vacio+'</p>';
+  return '<h2 class=sec>Trazabilidad de la página</h2><p class=nota>El recorrido de páginas ya viene de las visitas guardadas. Las pestañas y las prendas que abren o agregan se cuentan desde ahora: lo anterior no quedó registrado y no se inventa. Lo que sí se vende sale de las cotizaciones reales del catálogo y de la página.</p>'
+    +'<div class=flujo>'+pasos.map(p=>'<article class=paso><small>'+esc(p[0])+'</small><b>'+p[1]+'</b></article>').join('')+'</div>'
+    +'<div class=dos style="margin-top:10px"><section class=caja><h3>Pestañas que más entran</h3>'+barras(pest)+'<p style="color:var(--mut);font-size:13px">Cada clic en una categoría del inicio o del catálogo.</p></section>'
+    +'<section class=caja><h3>Páginas del menú</h3>'+barras(topDe(Object.entries(pags).map(([k,v])=>({n:nombrePag(k),v:v})),8))+'</section></div>'
+    +'<div class=dos style="margin-top:10px"><section class=caja><h3>Prendas que más preguntan</h3>'+lista(preguntan,'Todavía nadie abre una ficha desde que empezó este conteo.')+'</section>'
+    +'<section class=caja><h3>Prendas que más se piden</h3>'+lista(venden,'Todavía no hay prendas pedidas desde la página.')+'</section></div>'
+    +'<div class=dos style="margin-top:10px"><section class=caja><h3>Las miran y no las piden</h3>'+lista(flojos.map(p=>({n:p.nombre,v:p.ver+p.agregar,extra:'Sin cotización de la página'})),'Cuando alguien abra una prenda y no la pida, va a aparecer aquí.')+'</section>'
+    +'<section class=caja><h3>Las que menos se piden</h3>'+(menos.length?lista(menos.map(p=>({n:p.nombre,v:p.unidades,extra:p.pedidos+' cotizaciones'}))):'<p style="color:var(--mut);margin:0">Todavía no hay cantidades para comparar.</p>')+'<p style="color:var(--mut);font-size:13px">'+sinPedido+' prendas del catálogo no aparecen en ningún pedido de la página.</p></section></div>';
+}
+function htmlWompi(){
+  const u=DATOS.yo.user||{};
+  const base='<h2 class=sec>Wompi</h2><p class=aviso>Próximamente. El cobro sigue apagado: nadie puede pagar todavía desde la página. Cuando se active, el abono del 50% podrá cobrarse con Wompi.</p>';
+  if(u.rol!=='admin') return base+'<section class=caja><h3>Preparación</h3><p style="margin:0">Las llaves las guarda el administrador. La tienda ya tiene este espacio listo para conectarlas.</p></section>';
+  const w=WOMPI||{};
+  return base+'<section class=caja><h3>Llaves guardadas</h3><p>Ambiente: <b>'+esc(w.ambiente==='produccion'?'Producción':'Pruebas')+'</b>. Llave pública: <b>'+(w.publica?('termina en '+esc(w.publica_final)):'sin guardar')+'</b>. Llave privada: <b>'+(w.privada?'guardada':'sin guardar')+'</b>. Eventos: <b>'+(w.eventos?'guardados':'sin guardar')+'</b>. Cobro: <b>apagado</b>.</p>'
+    +'<form id=wompi class=form style="padding:8px 0;max-width:520px"><label>Ambiente<select id=wAmb><option value=prueba>Pruebas</option><option value=produccion>Producción</option></select></label><label>Llave pública<input id=wPub autocomplete=off placeholder="Deja en blanco para conservar la guardada"></label><label>Llave privada<input id=wPriv type=password autocomplete=new-password placeholder="Deja en blanco para conservar la guardada"></label><label>Secreto de eventos<input id=wEvt type=password autocomplete=new-password placeholder="Deja en blanco para conservar el guardado"></label><p class=err id=wErr></p><button class=entrar type=submit>Guardar para después</button></form></section>';
+}
+function pintar(){
+  const mapa={resumen:htmlResumen,bodega:htmlBodega,reportes:htmlReportes,traza:htmlTraza,wompi:htmlWompi};
+  $('#vista').innerHTML=marco((mapa[SEC]||htmlResumen)());
+  document.querySelectorAll('[data-sec]').forEach(b=>b.onclick=()=>{SEC=b.dataset.sec;pintar()});
+  $('#salir').onclick=async()=>{await fetch('/api/logout',{method:'POST',credentials:'same-origin'});DATOS=null;login()};
+  const bp=$('#bajarPedidos');
+  if(bp)bp.onclick=()=>{
+    const filas=[['numero','fecha','origen','producto','cantidad','estado','ciudad','referencia']].concat(ventasDe().map(c=>[c.numero||'',c.fecha||'',c.origen||'',c.producto||'',+c.cantidad||0,c.estado||'',c.ciudad||'',valorDe(c)||'']));
+    csv('hoba-pedidos-tienda.csv', filas);
+  };
+  const bs=$('#bajarStock');
+  if(bs)bs.onclick=()=>{
+    const filas=[['item','tipo','producto','talla','color','cantidad','reservado','disponible','minimo_uniformes','alcanza','ubicacion']].concat((DATOS.inv||[]).map(i=>{const peor=alcance(i)[0];return [i.item||'',i.tipo||'',i.producto||'',i.talla||'',i.color||'',+i.cantidad||0,+i.reservado||0,libre(i),minimoDe(i),peor?peor.alcanza:'',i.ubicacion||'']}));
+    csv('hoba-bodega.csv', filas);
+  };
+  const bv=$('#bajarVisitas');
+  if(bv)bv.onclick=()=>{
+    const filas=[['fecha','vistas','visitantes']].concat((DATOS.vis.dias||[]).map(d=>[d.fecha,+d.vistas||0,+d.unicas||0]));
+    csv('hoba-visitas.csv', filas);
+  };
+  const f=$('#wompi');
+  if(f){
+    if(WOMPI&&WOMPI.ambiente)$('#wAmb').value=WOMPI.ambiente;
+    f.onsubmit=async ev=>{
+      ev.preventDefault();
+      $('#wErr').textContent='';
+      try{
+        const r=await fetch('/api/wompi',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({ambiente:$('#wAmb').value,llave_publica:$('#wPub').value.trim(),llave_privada:$('#wPriv').value.trim(),secreto_eventos:$('#wEvt').value.trim()})});
+        const j=await r.json().catch(()=>({}));
+        if(!r.ok) throw new Error(j.error||'No se pudo guardar');
+        WOMPI=j; pintar();
+      }catch(e){$('#wErr').textContent=e.message}
+    };
+  }
+}
+async function tablero(){
+  $('#vista').innerHTML='<main><p>Cargando la administración…</p></main>';
+  try{
+    const suave=p=>p.catch(()=>[]);
+    const [yo,cots,inv,cat,vis,recetas]=await Promise.all([jget('/api/me'),jget('/api/cotizaciones'),jget('/api/inventario'),jget('/api/catalogo'),jget('/api/tienda'),suave(jget('/api/recetas'))]);
+    DATOS={yo:yo,cots:cots,inv:inv,cat:cat,vis:vis||{dias:[],productos:{},pestanas:{}},recetas:recetas||[]};
+    if((yo.user||{}).rol==='admin'){
+      try{WOMPI=await jget('/api/wompi')}catch(e){WOMPI={cobro:false}}
+    }
+  }catch(e){login();return}
+  pintar();
+}
+jget('/api/me').then(tablero).catch(login);
+</script>
+</body>
+</html>

@@ -818,7 +818,7 @@ function pintarMenu(){
   const nav=$('#snav');
   if(!nav)return;
   const menus=menusDe((CFG&&CFG.menus)||[{titulo:'Inicio',destino:'inicio',visible:true},{titulo:'Catálogo',destino:'catalogo',visible:true}]);
-  nav.innerHTML=menus.map(m=>'<a class="'+(m.destino==='catalogo'?'on':'')+'" href="'+esc(destinoMenu(m))+'">'+esc(m.titulo)+'</a>').join('');
+  nav.innerHTML=menus.map(m=>'<a class="'+(m.destino==='catalogo'?'on':'')+'" href="'+esc(destinoMenu(m))+'">'+esc(m.destino==='panel'?'Iniciar sesión':m.titulo)+'</a>').join('');
 }
 pintarMenu();
 pintaBarra();
